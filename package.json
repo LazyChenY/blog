@@ -1,0 +1,28 @@
+{
+  "name": "lazymr-blog",
+  "version": "1.0.0",
+  "description": "a fontend engineer's blog",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/LazyChenY/lazymr.github.io.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "HTML",
+    "CSS"
+  ],
+  "author": "lazymr (310195875@qq.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LazyChenY/lazymr.github.io/issues"
+  },
+  "homepage": "https://github.com/LazyChenY/lazymr.github.io#readme",
+  "devDependencies": {
+    "vuepress": "^0.8.4"
+  }
+}
