@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Welcome to Lazymr&#39;s blog | iview-admin架构分析</title>
+    <meta name="description" content="my blog about frontend">
+    
+    
+    <link rel="preload" href="/blog/assets/css/5.styles.92b0e9ea.css" as="style"><link rel="preload" href="/blog/assets/js/app.8bcbebe6.js" as="script"><link rel="preload" href="/blog/assets/js/3.1ff8c130.js" as="script"><link rel="prefetch" href="/blog/assets/js/0.bf54560f.js"><link rel="prefetch" href="/blog/assets/js/1.ea180ad0.js"><link rel="prefetch" href="/blog/assets/js/2.38853ef2.js"><link rel="prefetch" href="/blog/assets/js/4.0074ae30.js">
+    <link rel="stylesheet" href="/blog/assets/css/5.styles.92b0e9ea.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/blog/" class="home-link router-link-active"><!----><span class="site-name">
+      Welcome to Lazymr's blog
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">Blog</a></div><div class="nav-item"><a href="/blog/CSS/adaptive.html" class="nav-link">Project</a></div><div class="nav-item"><a href="/blog/JavaScript/webpack/webpack-s1.html" class="nav-link">Resume</a></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">Blog</a></div><div class="nav-item"><a href="/blog/CSS/adaptive.html" class="nav-link">Project</a></div><div class="nav-item"><a href="/blog/JavaScript/webpack/webpack-s1.html" class="nav-link">Resume</a></div><!----></nav><ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading open"><span>JavaScript</span><span class="arrow down"></span></p><ul class="sidebar-group-items"><li><a href="/blog/JavaScript/iview-admin/iview-admin.html" class="active sidebar-link">iview-admin架构分析</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/JavaScript/webpack/webpack-s1.html" class="sidebar-link">论如何成为高级webpack配置师—基础</a></li><li><a href="/blog/JavaScript/webpack/webpack-s2.html" class="sidebar-link">论如何成为高级webpack配置师—进阶</a></li></ul></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading"><span>CSS</span><span class="arrow right"></span></p><!----></div></li></ul></div><div class="page"><div class="content"><h1 id="iview-admin架构分析"><a href="#iview-admin架构分析" aria-hidden="true" class="header-anchor">#</a> iview-admin架构分析</h1><h3 id="背景"><a href="#背景" aria-hidden="true" class="header-anchor">#</a> 背景</h3><p>随着业务发展，公司现有的某个项目（代号F）越来越庞大复杂，原有项目架构在易维护性，易扩展性上体现得越来越吃力，一直在考虑重构。前段时间机缘巧合看到TalkingData团队发布了一个后台管理系统集成解决方案<a href="https://github.com/iview/iview-admin" target="_blank" rel="noopener noreferrer">iview-admin</a>，clone下来后发现整个项目架构异常清奇，值得学习一波</p><p>个人认为，可从组件化、模块化、规范化、自动化四个方面来思考如何实现一个好的项目架构，达到易维护、易扩展、模块和模块间的低耦合性，使用一些工具解决一些通用型问题等目的, 下面从以上几个方面来分析iview-admin的架构</p><h3 id="模块化"><a href="#模块化" aria-hidden="true" class="header-anchor">#</a> 模块化</h3><p>简单来说，模块化就是将一个大文件拆分成相互依赖的小文件，再进行统一的拼装和加载，是在文件层面上对代码和资源进行拆分。</p><p>下面将项目F和iview-admin进行对比:</p><p>项目F所有的路由页面都放在components文件夹中，这个文件夹中还有一些适用于整个项目的common组件和mixins。</p><p>其中每个路由页面是一个单独.vue文件，这些.vue文件中包含了html，js和scss，稍微大点的页面已经可怕到有上千行代码了：</p><pre class="language-text"><code>├─components
+│  ├─common
+│  ├─ 一个长达千行的xxx.vue
+│  ├─ 另一个长达千行的xxx.vue
+│  └─ ...
+</code></pre><p>而来看一下iview-admin的文件结构：</p><pre class="language-text"><code>├─views
+│  ├─common-components
+│  ├─error-pages
+│  │   ├─error-page.vue
+│  │   ├─error-page.less
+│  │   ├─404.vue
+│  │   ├─404.less
+│  │   ├─500.vue
+│  │   ├─500.less
+│  │   ├─403.vue
+│  │   └─403.less
+│  └─tables
+│      ├─components
+│      ├─data
+│      ├─xxx.vue
+│      └─xxx.less
+</code></pre><p>首先明显可以看到一点，iview-admin将less文件单独拆分开来了，这样一来.vue文件明显可以小很多</p><p>接下来来看一下error-pages文件夹下的error-page.vue文件：</p><pre class="language-js"><code><span class="token operator">...</span>
+
+<span class="token operator">&lt;</span>Row<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;error-page-show&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>error404<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>error404<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;error-page-cover&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>Row<span class="token operator">&gt;</span>
+
+<span class="token operator">...</span>
+
+<span class="token operator">&lt;</span>Row<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;error-page-show&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>error403<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>error403<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;error-page-cover&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>Row<span class="token operator">&gt;</span>
+
+<span class="token operator">...</span>
+
+
+<span class="token operator">&lt;</span>Row<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;error-page-show&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>error500<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>error500<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;error-page-cover&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>Row<span class="token operator">&gt;</span>
+
+<span class="token operator">...</span>
+
+<span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+<span class="token keyword">import</span> Error404 <span class="token keyword">from</span> <span class="token string">'./404.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Error500 <span class="token keyword">from</span> <span class="token string">'./500.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Error403 <span class="token keyword">from</span> <span class="token string">'./403.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        Error404<span class="token punctuation">,</span>
+        Error500<span class="token punctuation">,</span>
+        Error403
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+</code></pre><p>可以发现，</p><h3 id="utils"><a href="#utils" aria-hidden="true" class="header-anchor">#</a> utils</h3><p>将项目中所有共用的方法封装到utils对象中，包括ajax请求</p></div><!----><div class="content page-nav"><p class="inner"><!----><span class="next"><a href="/blog/JavaScript/webpack/webpack-s1.html">
+          论如何成为高级webpack配置师—基础
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/blog/assets/js/3.1ff8c130.js" defer></script><script src="/blog/assets/js/app.8bcbebe6.js" defer></script>
+  </body>
+</html>
