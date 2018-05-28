@@ -1,2 +1,2 @@
 # blog
-JavaScript, HTML, CSS,Python
+JavaScript, HTML, CSS, Python
