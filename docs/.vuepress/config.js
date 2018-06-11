@@ -1,10 +1,11 @@
 module.exports = {
-    title: "Welcome to Lazymr's blog",
+    title: "Lazymr's blog",
     dest: './dist',
     base: '/blog/',
     description: 'Frontend JavaScript CSS',
     repo: 'git@github.com:LazyChenY/blog.git',
     port: 9995,
+    head: ['link', {rel: 'icon', href: '/avtor.jpeg'}],
     themeConfig: {
         nav: [{
             text: 'Blog',
@@ -14,7 +15,7 @@ module.exports = {
             link: '/CSS/adaptive'
         }, {
             text: 'Resume',
-            link: '/JavaScript/webpack/webpack-s1'
+            link: '/JavaScript/reconstruction/reconstruction'
         }],
         sidebar: [{
             title: 'JavaScript',
@@ -22,7 +23,10 @@ module.exports = {
             children: [
                  '/JavaScript/reconstruction/reconstruction',
                  '/JavaScript/webpack/webpack-s1',
-                 '/JavaScript/webpack/webpack-s2'
+                 '/JavaScript/webpack/webpack-s2',
+                 '/JavaScript/clipboard',
+                 '/JavaScript/screen/screen',
+                 '/JavaScript/browser'
             ]
         }, {
             title: 'CSS',
