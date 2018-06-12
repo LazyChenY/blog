@@ -17,16 +17,19 @@ module.exports = {
             text: 'Resume',
             link: '/JavaScript/reconstruction/reconstruction'
         }],
+        sidebarDepth: 0,
         sidebar: [{
             title: 'JavaScript',
             collapsable: true,
             children: [
                  '/JavaScript/reconstruction/reconstruction',
-                 '/JavaScript/webpack/webpack-s1',
-                 '/JavaScript/webpack/webpack-s2',
                  '/JavaScript/clipboard',
                  '/JavaScript/screen/screen',
-                 '/JavaScript/browser'
+                 '/JavaScript/browser',
+                 '/JavaScript/webpack/webpack-s1',
+                 '/JavaScript/webpack/webpack-s2',
+                 // '/JavaScript/webpack/webpack-s3',
+                 // '/JavaScript/webpack/webpack-s4'
             ]
         }, {
             title: 'CSS',
