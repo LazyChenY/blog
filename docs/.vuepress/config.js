@@ -9,33 +9,31 @@ module.exports = {
     themeConfig: {
         nav: [{
             text: 'Blog',
-            link: '/'
+            link: '/article/JavaScript/clipboard'
         }, {
             text: 'Project',
-            link: '/CSS/adaptive'
+            link: '/project/flex/flex'
         }, {
             text: 'Resume',
-            link: '/JavaScript/reconstruction/reconstruction'
+            link: '/aboutMe'
         }],
-        sidebarDepth: 0,
-        sidebar: [{
-            title: 'JavaScript',
-            collapsable: true,
-            children: [
-                 '/JavaScript/reconstruction/reconstruction',
-                 '/JavaScript/clipboard',
-                 '/JavaScript/screen/screen',
-                 '/JavaScript/browser',
-                 '/JavaScript/webpack/webpack-s1',
-                 '/JavaScript/webpack/webpack-s2',
-                 // '/JavaScript/webpack/webpack-s3',
-                 // '/JavaScript/webpack/webpack-s4'
+        sidebarDepth: 3,
+        sidebar: {
+            '/article/': [
+                'JavaScript/clipboard',
+                'JavaScript/screen/screen',
+                'JavaScript/extension',
+                'JavaScript/browser',
+                'JavaScript/webpack/webpack-s1',
+                'JavaScript/webpack/webpack-s2',
+                'JavaScript/reconstruction/reconstruction',
+                'CSS/adaptive'
+            ],
+            '/project/': [
+                'flex/flex',
+                'flappyBird/flappyBird'
             ]
-        }, {
-            title: 'CSS',
-            collapsable: true,
-            children: ['/CSS/adaptive']
-        }]
+        }
     },
     configureWebpack: {
         resolve: {

@@ -2,5 +2,5 @@
 home: true
 heroImage: /avtor.jpeg
 actionText: Get Started →
-actionLink: /JavaScript/reconstruction/reconstruction
+actionLink: /article/JavaScript/reconstruction/reconstruction
 ---
