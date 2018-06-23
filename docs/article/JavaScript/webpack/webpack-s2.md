@@ -2,16 +2,49 @@
 
 > 上篇主要讲了关于webpack的一些基础，那么本文则是针对上一篇的实践，也是实际开发中常常遇到的一些实践
 
-`main.js`中需要loader，用了bable-loader依然没用，写法有误
+<!-- `main.js`中需要loader，用了bable-loader依然没用，写法有误
 加入lodash，文件过大，
 ```js
 [BABEL] Note: The code generator has deoptimised the styling of "/Users/rice/lazy/webpack-demo/node_modules/lodash/lodash.js" as it exceeds the max of "500KB"
 ```
-打包时间直接2000ms +
+打包时间直接2000ms + -->
 
 
-## 问题
+## 优化输出结果
+
+减小打包输出结果，提升网页打开速度并节约带宽
+
+* 压缩css
+
+```js
+    module.export = {
+        module: {
+            rules: [{test: /\.css$/, loader: "style-loader!css-loader?minimize"}]
+        }
+    }
+```
+给css-loader带上参数`minimize`即可，（style-loader是用于将编译完成的css插入html中的工具）
+
+* 合并压缩JS
+```js
+```
+
+* 合并压缩图片文件
+```js
+```
+
+
+
+
+
+
+
+
+
+
+
 <!-- - [ ] webpack压缩合并图片怎么弄的？
+- [ ] 合并压缩js文件代码怎么弄？
 - [ ] 公共代码打包的目的？减少加载次数和量？
 - [ ] 怎么让非首屏代码异步加载？
 - [ ] 怎么按需加载不同页面代码？
@@ -25,7 +58,7 @@
  
 
 
-## 插件
+## 常用插件
 
  比较常见的plugins有：
 
@@ -236,8 +269,4 @@ module.exports = {
     }
 }
 
-作者：ngaiwe
-链接：https://juejin.im/post/5ad1d85f518825651d081c68
-来源：掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
