@@ -27,7 +27,13 @@ module.exports = {
                 'JavaScript/webpack/webpack-s1',
                 'JavaScript/webpack/webpack-s2',
                 'JavaScript/reconstruction/reconstruction',
-                'CSS/adaptive'
+                // 'JavaScript/promise',
+                // 'JavaScript/spa-mpa',
+                // 'JavaScript/ui-components-lib',
+                // 'JavaScript/engineering',
+                // 'CSS/adaptive',
+                'JavaScript/api-rules',
+                'JavaScript/token'
             ],
             '/project/': [
                 'flex/flex',
