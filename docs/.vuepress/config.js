@@ -33,7 +33,12 @@ module.exports = {
                 // 'JavaScript/engineering',
                 // 'CSS/adaptive',
                 'JavaScript/api-rules',
-                'JavaScript/token'
+                'JavaScript/token',
+                'JavaScript/iview-render',
+                'JavaScript/dev-build',
+                'JavaScript/ssh-key',
+                'JavaScript/ssh-login',
+                'JavaScript/js-tricks'
             ],
             '/project/': [
                 'flex/flex',

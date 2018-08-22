@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lazymr&#39;s blog | 一台设备配置多个ssh key</title>
+    <meta name="description" content="Frontend JavaScript CSS">
+    <link>
+  <undefined></undefined>
+    
+    <link rel="preload" href="/blog/assets/css/26.styles.04b089a6.css" as="style"><link rel="preload" href="/blog/assets/js/app.6a1da034.js" as="script"><link rel="preload" href="/blog/assets/js/9.0f4203ca.js" as="script"><link rel="prefetch" href="/blog/assets/js/12.24c20d16.js"><link rel="prefetch" href="/blog/assets/js/0.d987f50a.js"><link rel="prefetch" href="/blog/assets/js/1.c8c78e02.js"><link rel="prefetch" href="/blog/assets/js/2.e9a4fb27.js"><link rel="prefetch" href="/blog/assets/js/3.b59e09cf.js"><link rel="prefetch" href="/blog/assets/js/4.5e4e0778.js"><link rel="prefetch" href="/blog/assets/js/5.68654295.js"><link rel="prefetch" href="/blog/assets/js/6.3c36e149.js"><link rel="prefetch" href="/blog/assets/js/7.9e8b8e2f.js"><link rel="prefetch" href="/blog/assets/js/8.c1768497.js"><link rel="prefetch" href="/blog/assets/js/10.3886c603.js"><link rel="prefetch" href="/blog/assets/js/11.5d440939.js"><link rel="prefetch" href="/blog/assets/js/13.eacda729.js"><link rel="prefetch" href="/blog/assets/js/14.20c9e7d0.js"><link rel="prefetch" href="/blog/assets/js/15.12fa5cc8.js"><link rel="prefetch" href="/blog/assets/js/16.219bfcd8.js"><link rel="prefetch" href="/blog/assets/js/17.769a4ebe.js"><link rel="prefetch" href="/blog/assets/js/18.d4b298b7.js"><link rel="prefetch" href="/blog/assets/js/19.98ef5cd9.js"><link rel="prefetch" href="/blog/assets/js/20.2c68b8fb.js"><link rel="prefetch" href="/blog/assets/js/21.c9dcd731.js"><link rel="prefetch" href="/blog/assets/js/22.d686a951.js"><link rel="prefetch" href="/blog/assets/js/23.58511392.js"><link rel="prefetch" href="/blog/assets/js/24.1af3850d.js"><link rel="prefetch" href="/blog/assets/js/25.29e3c505.js">
+    <link rel="stylesheet" href="/blog/assets/css/26.styles.04b089a6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/blog/" class="home-link router-link-active"><!----><span class="site-name">
+      Lazymr's blog
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/article/JavaScript/clipboard.html" class="nav-link">Blog</a></div><div class="nav-item"><a href="/blog/project/flex/flex.html" class="nav-link">Project</a></div><div class="nav-item"><a href="/blog/aboutMe.html" class="nav-link">Resume</a></div><!----></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/article/JavaScript/clipboard.html" class="nav-link">Blog</a></div><div class="nav-item"><a href="/blog/project/flex/flex.html" class="nav-link">Project</a></div><div class="nav-item"><a href="/blog/aboutMe.html" class="nav-link">Resume</a></div><!----></nav><ul class="sidebar-links"><li><a href="/blog/article/JavaScript/clipboard.html" class="sidebar-link">原生JS实现粘贴到剪贴板</a></li><li><a href="/blog/article/JavaScript/screen/screen.html" class="sidebar-link">关于物理像素/逻辑像素那点事儿</a></li><li><a href="/blog/article/JavaScript/extension.html" class="sidebar-link">关于Chrome浏览器插件开发</a></li><li><a href="/blog/article/JavaScript/browser.html" class="sidebar-link">浏览器内核与JS引擎</a></li><li><a href="/blog/article/JavaScript/webpack/webpack-s1.html" class="sidebar-link">webpack配置工程师了解一下—基础</a></li><li><a href="/blog/article/JavaScript/webpack/webpack-s2.html" class="sidebar-link">webpack配置工程师了解一下—实践</a></li><li><a href="/blog/article/JavaScript/reconstruction/reconstruction.html" class="sidebar-link">项目重构优化了解一下</a></li><li><a href="/blog/article/JavaScript/api-rules.html" class="sidebar-link">前后端接口规范</a></li><li><a href="/blog/article/JavaScript/token.html" class="sidebar-link">聊聊token那些事</a></li><li><a href="/blog/article/JavaScript/iview-render.html" class="sidebar-link">iview render的使用</a></li><li><a href="/blog/article/JavaScript/dev-build.html" class="sidebar-link">开发模式下动态传入API地址进行构建</a></li><li><a href="/blog/article/JavaScript/ssh-key.html" class="active sidebar-link">一台设备配置多个ssh key</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/article/JavaScript/ssh-login.html" class="sidebar-link">ssh简写免密登录</a></li><li><a href="/blog/article/JavaScript/js-tricks.html" class="sidebar-link">JavaScript中常用的小技巧</a></li></ul></div><div class="page"><div class="content"><h1 id="一台设备配置多个ssh-key"><a href="#一台设备配置多个ssh-key" aria-hidden="true" class="header-anchor">#</a> 一台设备配置多个ssh key</h1><h3 id="_1-生成ssh-key"><a href="#_1-生成ssh-key" aria-hidden="true" class="header-anchor">#</a> 1.生成ssh key:</h3><pre class="language-text"><code>$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa): /Users/rice/.ssh/id_rsa_test
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again: 
+</code></pre><p>上方的命令执行多次则会生成多个ssh key, 注意区别命名,如果不输入文件名，则会自动生成一对id_rsa, id_rsa.pub文件</p><p>可通过cat命令查看，如</p><pre class="language-text"><code>$ cat ~/.ssh/id_rsa_test.pub
+</code></pre><p>公钥大概长这样子</p><p><code>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU GPl+nafzlHDTYW7hdI4yZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3 Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx NrRFi9wrf+M7Q== schacon@agadorlaptop.local</code></p><h3 id="_2-为不同网站应用ssh-key"><a href="#_2-为不同网站应用ssh-key" aria-hidden="true" class="header-anchor">#</a> 2.为不同网站应用ssh key</h3><p>修改ssh下的config文件</p><pre class="language-text"><code>$ sudo vim ~/.ssh/config
+</code></pre><p>加上以下配置：</p><pre class="language-text"><code>Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_a
+
+Host git.oschina.net
+    HostName git.oschina.net
+    User git
+    IdentityFile ~/.ssh/id_rsa_b
+...
+</code></pre><h3 id="_3-将对应的公钥添加至对应的网站"><a href="#_3-将对应的公钥添加至对应的网站" aria-hidden="true" class="header-anchor">#</a> 3.将对应的公钥添加至对应的网站</h3><h3 id="_4-为项目单独配置身份信息"><a href="#_4-为项目单独配置身份信息" aria-hidden="true" class="header-anchor">#</a> 4.为项目单独配置身份信息</h3><p>像 github 或者 gitlab等网站都会要求验证身份,通常情况下配置一个全局信息就可以了:</p><pre class="language-text"><code>$ git config --global user.name &quot;Firstname Lastname&quot;
+$ git config --global user.email &quot;your_email@example.com&quot;
+</code></pre><p>这个命令会在~/.gitconfig填入以下信息：</p><pre class="language-text"><code>[user]
+  name = Firstname Lastname
+  email = your_email@example.com
+</code></pre><p>如果需要修改信息，直接修改这个文件即可。</p><p>针对一些特殊情况，如果需要配置多个身份信息，可以为每个项目单独配置:</p><pre class="language-text"><code>$ cd your_project
+$ git config user.name &quot;Firstname Lastname&quot;
+$ git config user.email &quot;your_email@example.com&quot;
+</code></pre><p>这个命令会在项目目录下输出文件：/.git／.config</p><p>这里设置的姓名和邮箱地址会用在 Git 的提交日志中。</p><p>至此查看是否成功了，如果不成功，尝试debug, 比如测试github，<code>ssh -vT git@github.com</code>,根据log信息修改即可</p><p>中间遇到一个报错</p><pre class="language-text"><code>ssh: Could not resolve hostname xxx nodename nor servname provided, or not known
+</code></pre><p>将远程仓库的地址修改为非<code>ssh://</code>即可：</p><pre class="language-text"><code>git remote remove xxx
+git remote add xxx git://....
+</code></pre></div><!----><div class="content page-nav"><p class="inner"><span class="prev">
+        ← <a href="/blog/article/JavaScript/dev-build.html" class="prev">
+          开发模式下动态传入API地址进行构建
+        </a></span><span class="next"><a href="/blog/article/JavaScript/ssh-login.html">
+          ssh简写免密登录
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/blog/assets/js/9.0f4203ca.js" defer></script><script src="/blog/assets/js/app.6a1da034.js" defer></script>
+  </body>
+</html>
