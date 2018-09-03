@@ -38,7 +38,9 @@ module.exports = {
                 'JavaScript/dev-build',
                 'JavaScript/ssh-key',
                 'JavaScript/ssh-login',
-                'JavaScript/js-tricks'
+                'JavaScript/js-tricks',
+                'JavaScript/pdf-review/pdf',
+                'JavaScript/event-bus'
             ],
             '/project/': [
                 'flex/flex',
