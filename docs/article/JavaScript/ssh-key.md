@@ -39,6 +39,12 @@ Host git.oschina.net
     HostName git.oschina.net
     User git
     IdentityFile ~/.ssh/id_rsa_b
+
+Host test
+ HostName xxx.xxx.x.xx
+ User test
+ IdentityFile ~/.ssh/id_rsa_c
+ PreferredAuthentications publickey
 ...
 ```
 
