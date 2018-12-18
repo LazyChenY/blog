@@ -24,7 +24,7 @@ mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
 NrRFi9wrf+M7Q== schacon@agadorlaptop.local`
 
 ### 2.为不同网站应用ssh key
-修改ssh下的config文件
+修改.ssh下的config文件
 ```
 $ sudo vim ~/.ssh/config
 ```
