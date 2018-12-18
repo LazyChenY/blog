@@ -38,7 +38,11 @@ module.exports = {
                 'JavaScript/dev-build',
                 'JavaScript/ssh-key',
                 'JavaScript/ssh-login',
-                'JavaScript/js-tricks'
+                'JavaScript/js-tricks',
+                'JavaScript/pdf-review/pdf',
+                'JavaScript/event-bus',
+                'JavaScript/vue-cli3',
+                'JavaScript/yarn-vs-npm'
             ],
             '/project/': [
                 'flex/flex',

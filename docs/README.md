@@ -1,6 +1,6 @@
 ---
 home: true
 heroImage: /avator.jpeg
-actionText: About me →
+actionText: 😊 Get More →
 actionLink: /article/JavaScript/clipboard
 ---

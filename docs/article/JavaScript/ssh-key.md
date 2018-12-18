@@ -24,7 +24,7 @@ mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
 NrRFi9wrf+M7Q== schacon@agadorlaptop.local`
 
 ### 2.为不同网站应用ssh key
-修改ssh下的config文件
+修改.ssh下的config文件
 ```
 $ sudo vim ~/.ssh/config
 ```
@@ -39,6 +39,12 @@ Host git.oschina.net
     HostName git.oschina.net
     User git
     IdentityFile ~/.ssh/id_rsa_b
+
+Host test
+ HostName xxx.xxx.x.xx
+ User test
+ IdentityFile ~/.ssh/id_rsa_c
+ PreferredAuthentications publickey
 ...
 ```
 
