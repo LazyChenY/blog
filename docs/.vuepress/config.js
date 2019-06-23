@@ -9,7 +9,7 @@ module.exports = {
     themeConfig: {
         nav: [{
             text: 'Blog',
-            link: '/article/JavaScript/clipboard'
+            link: '/article/JavaScript/Q&A-daily'
         }, {
             text: 'Project',
             link: '/project/flex/flex'
