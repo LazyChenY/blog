@@ -20,6 +20,7 @@ module.exports = {
         sidebarDepth: 3,
         sidebar: {
             '/article/': [
+                'JavaScript/Q&A-daily',
                 'JavaScript/clipboard',
                 'JavaScript/screen/screen',
                 'JavaScript/extension',
@@ -42,7 +43,10 @@ module.exports = {
                 'JavaScript/pdf-review/pdf',
                 'JavaScript/event-bus',
                 'JavaScript/vue-cli3',
-                'JavaScript/yarn-vs-npm'
+                'JavaScript/yarn-vs-npm',
+                'JavaScript/micro-fe',
+                'Other/vue-cli3-optimise',
+                'Typescript/first-explore'
             ],
             '/project/': [
                 'flex/flex',

@@ -55,7 +55,7 @@ NODE_ENV=production
 ```
 上述即可实现三种环境均构建出相同结构的应用，且都是生产环境应用；
 
-至于不同的domain, 在各自的环境变量文件中分别设置即可：
+至于不同的domain, 在各自的环境变量文件中分别设置即可(注：只有`VUE_APP_`开头的变量会被 webpack.DefinePlugin 静态嵌入到客户端侧的包中)：
 
 .env.test文件：
 ```js
