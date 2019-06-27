@@ -75,7 +75,7 @@ type chen = {
   say: (age:number) => string
 }
 ```
-(解释)[https://tasaid.com/blog/20171102225101.html]
 
+[解释](https://tasaid.com/blog/20171102225101.html)
 
 ##### vue-class-component 类式vue组件

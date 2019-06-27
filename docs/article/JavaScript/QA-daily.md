@@ -1,8 +1,8 @@
 # 每日一题
 
-原repo地址: (javascript-questions)[https://github.com/lydiahallie/javascript-questions]
+原repo地址: [javascript-questions](https://github.com/lydiahallie/javascript-questions)
 
-# JavaScript 进阶问题列表
+## 简介
 
 我在我的 [Instagram](https://www.instagram.com/theavocoder) 上每天都会发布 JavaScript 的多选问题，并且同时也会在这个仓库中发布。
 
@@ -13,7 +13,7 @@
 
 ---
 
-###### 1. 输出是什么？
+## 1. 输出是什么？
 
 ```javascript
 function sayHi() {
@@ -45,7 +45,7 @@ sayHi()
 
 ---
 
-###### 2. 输出是什么？
+## 2. 输出是什么？
 >mark
 
 ```javascript
@@ -76,7 +76,7 @@ for (let i = 0; i < 3; i++) {
 
 ---
 
-###### 3. 输出是什么？
+## 3. 输出是什么？
 >mark
 ```javascript
 const shape = {
@@ -112,8 +112,11 @@ shape.perimeter()
 
 >***执行上下文*** 是评估和执行 JavaScript 代码的环境的抽象概念。每当 Javascript 代码在运行的时候，它都是在执行上下文中运行。
 >JavaScript 中有三种执行上下文类型:
+>
 >1.**全局执行上下文** — 这是默认或者说基础的上下文，任何不在函数内部的代码都在全局上下文中。它会执行两件事：创建一个全局的 window 对象（浏览器的情况下），并且设置 this 的值等于这个全局对象。一个程序中只会有一个全局执行上下文。
+>
 >2.**函数执行上下文** — 每当一个函数被调用时, 都会为该函数创建一个新的上下文。每个函数都有它自己的执行上下文，不过是在函数被调用时创建的。函数上下文可以有任意多个。每当一个新的执行上下文被创建，它会按定义的顺序（将在后文讨论）执行一系列步骤。
+>
 >3.**Eval 函数执行上下文** — 执行在 eval 函数内部的代码也会有它属于自己的执行上下文，但由于 JavaScript 开发者并不经常使用 eval，所以在这里我不会讨论它。
 >
 >[关于执行上下文和执行栈的传送门](https://juejin.im/post/5ba32171f265da0ab719a6d7)
@@ -125,7 +128,7 @@ shape.perimeter()
 
 ---
 
-###### 4. 输出是什么？
+## 4. 输出是什么？
 
 ```javascript
 ;+true
@@ -150,8 +153,8 @@ shape.perimeter()
 
 ---
 
-###### 5. 哪一个是无效的？
-
+## 5. 哪一个是无效的？
+>mark
 ```javascript
 const bird = {
   size: 'small'
@@ -184,7 +187,8 @@ const mouse = {
 </p>
 <p>
 
-> ***Symbol对象***：
+> ***Symbol对象***
+>
 >ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值。它是 JavaScript 语言的第七种数据类型，前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
 >
 >Symbol 值通过Symbol函数生成。这就是说，对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的 Symbol 类型。凡是属性名属于 Symbol 类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。
@@ -199,7 +203,7 @@ const mouse = {
 </details>
 
 
-###### 6. 输出是什么？
+## 6. 输出是什么？
 
 ```javascript
 let c = { greeting: 'Hey!' }
@@ -224,7 +228,7 @@ console.log(d.greeting)
 
 首先，变量 `c` 的值是一个对象。接下来，我们给 `d` 分配了一个和 `c` 对象相同的引用。
 
-<img src="https://i.imgur.com/ko5k0fs.png" width="200">
+<!-- <img src="https://i.imgur.com/ko5k0fs.png" width="200"> -->
 
 因此当我们改变其中一个对象时，其实是改变了所有的对象。
 
@@ -233,7 +237,7 @@ console.log(d.greeting)
 
 ---
 
-###### 7. 输出是什么？
+## 7. 输出是什么？
 
 ```javascript
 let a = 3
@@ -266,7 +270,7 @@ console.log(b === c)
 
 ---
 
-###### 8. 输出是什么？
+## 8. 输出是什么？
 >mark
 ```javascript
 class Chameleon {
@@ -299,10 +303,8 @@ freddie.colorChange('orange')
 </p>
 <p>
 
->***Class***
->
->ES6提供了更接近传统语言的写法，引入了 Class（类）这个概念，作为对象的模板。通过class关键字，可以定义类。
->基本上，ES6 的class可以看作只是一个语法糖，它的绝大部分功能，ES5 都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。
+>[Class基础传送门](/article/JavaScript/Class.html)
+
 </p>
 
 </details>
@@ -453,7 +455,7 @@ console.log(sarah)
 
 在**捕获**（capturing）阶段中，事件从祖先元素向下传播到目标元素。当事件达到**目标**（target）元素后，**冒泡**（bubbling）才开始。
 
-<img src="https://i.imgur.com/N18oRgd.png" width="200">
+<!-- <img src="https://i.imgur.com/N18oRgd.png" width="200"> -->
 
 </p>
 </details>
@@ -929,23 +931,23 @@ baz()
 
 将 _callback_ 推送到 WebAPI 后，`setTimeout` 函数本身(但不是回调！)将从栈中弹出。
 
-<img src="https://i.imgur.com/X5wsHOg.png" width="200">
+<!-- <img src="https://i.imgur.com/X5wsHOg.png" width="200"> -->
 
 现在，`foo` 被调用，打印 `"First"`。
 
-<img src="https://i.imgur.com/Pvc0dGq.png" width="200">
+<!-- <img src="https://i.imgur.com/Pvc0dGq.png" width="200"> -->
 
 `foo` 从栈中弹出，`baz` 被调用. 打印 `"Third"`。
 
-<img src="https://i.imgur.com/WhA2bCP.png" width="200">
+<!-- <img src="https://i.imgur.com/WhA2bCP.png" width="200"> -->
 
 WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名为 _queue_ 的地方。
 
-<img src="https://i.imgur.com/NSnDZmU.png" width="200">
+<!-- <img src="https://i.imgur.com/NSnDZmU.png" width="200"> -->
 
 这就是事件循环开始工作的地方。一个**事件循环**查看栈和任务队列。如果栈是空的，它接受队列上的第一个元素并将其推入栈。
 
-<img src="https://i.imgur.com/uyiScAI.png" width="200">
+<!-- <img src="https://i.imgur.com/uyiScAI.png" width="200"> -->
 
 `bar` 被调用，打印 `"Second"`，然后它被栈弹出。
 

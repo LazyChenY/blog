@@ -1,6 +1,6 @@
 # 一台设备配置多个ssh key
 
-### 1.生成ssh key:
+## 1.生成ssh key:
 ```
 $ ssh-keygen -t rsa -C "your_email@example.com"
 Generating public/private rsa key pair.
@@ -23,7 +23,7 @@ t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En
 mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
 NrRFi9wrf+M7Q== schacon@agadorlaptop.local`
 
-### 2.为不同网站应用ssh key
+## 2.为不同网站应用ssh key
 修改.ssh下的config文件
 ```
 $ sudo vim ~/.ssh/config
@@ -48,9 +48,9 @@ Host test
 ...
 ```
 
-### 3.将对应的公钥添加至对应的网站
+## 3.将对应的公钥添加至对应的网站
 
-### 4.为项目单独配置身份信息
+## 4.为项目单独配置身份信息
 像 github 或者 gitlab等网站都会要求验证身份,通常情况下配置一个全局信息就可以了:
 ```
 $ git config --global user.name "Firstname Lastname"

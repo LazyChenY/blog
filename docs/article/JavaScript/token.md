@@ -1,15 +1,15 @@
 # 聊聊token那些事
 
-#### 作用
+## 作用
 
  * 用户标示／通行证： http请求是无状态的，无法识别用户身份
  * 减少服务器压力：减少直接校验userid和paassword的过程即减少了不断从主数据库查询数据的压力
 
-#### 原理
+## 原理
 用户第一次登录，服务器通过数据库校验其UserId和Password合法，则再根据
 随机数字+userid+当前时间戳， 再经过DES加密生成一个token串并返回给客户端
 
-#### 当token过期时
+## 当token过期时
 
 当一个token过期时，前端通常有两种方式来重新获得token：
 
@@ -29,7 +29,7 @@
 
 > 用户登录 —> 服务端校验其用户名密码是否合法，合法则返回一对`accessToken`与`refreshToken` —> 客户端将一对token存储起来并在之后的请求中带上`accessToken` —> `accessToken`过期时服务端返回token过期信息如`status code: 401` —> 客户端拦截到返回code 401的请求，并发起获取新token的请求，该请求会带上`refreshToken` —> 服务端校验通过后返回一对新的`accessToken`与`refreshToken` 
 
-#### token和session
+## token和session
 
 token和session的功能是一样的，都是为了与浏览器建立连接并获取服务端的用户数据，二者只是实现方式不一样。
 
