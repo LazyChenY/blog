@@ -2,5 +2,5 @@
 home: true
 heroImage: /avator.jpeg
 actionText: 😊 Get More →
-actionLink: /article/JavaScript/clipboard
+actionLink: /article/JavaScript/QA-daily
 ---
