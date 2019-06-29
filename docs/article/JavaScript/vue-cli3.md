@@ -1,14 +1,14 @@
 # 关于Vue CLI 3 不同环境下打包代码
 
-### 目标：
+## 目标
 实现三种环境（production, test, development）下的代码打包结构一致，并根据不同环境打包出的后端数据接口domain有所不同
 
-### 问题：
+## 问题
 1. 在`test`和`development`模式下， Vue CLI 3打包出的js代码块是直接位于dist目录下，而 `production`环境下js代码块则是在一个js文件夹下，也就是说前两者环境打包出的代码与后者的文件目录不一致，虽然影响不大但实际上项目中更期望三种环境下打包出的代码结构一致
 
 2. 使得不同环境使用不同的domain
 
-### 实现
+## 实现
 查阅[文档](https://cli.vuejs.org/zh/guide/mode-and-env.html)得知， 可以在`vue-cli-service`构建代码的时候通过参数`--mode`和`.env`文件配合来实现我们的目的
 
 官方示例如下：

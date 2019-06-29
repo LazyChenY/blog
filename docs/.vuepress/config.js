@@ -9,7 +9,7 @@ module.exports = {
     themeConfig: {
         nav: [{
             text: 'Blog',
-            link: '/article/JavaScript/Q&A-daily'
+            link: '/article/JavaScript/QA-daily'
         }, {
             text: 'Project',
             link: '/project/flex/flex'
@@ -20,7 +20,8 @@ module.exports = {
         sidebarDepth: 3,
         sidebar: {
             '/article/': [
-                'JavaScript/Q&A-daily',
+                'JavaScript/QA-daily',
+                'JavaScript/Class',
                 'JavaScript/clipboard',
                 'JavaScript/screen/screen',
                 'JavaScript/extension',
