@@ -311,7 +311,7 @@ freddie.colorChange('orange')
 
 ---
 
-###### 9. 输出是什么？
+## 9. 输出是什么？
 
 ```javascript
 let greeting
@@ -337,7 +337,7 @@ console.log(greetign)
 
 ---
 
-###### 10. 当我们这么做时，会发生什么？
+## 10. 当我们这么做时，会发生什么？
 
 ```javascript
 function bark() {
@@ -366,7 +366,7 @@ bark.animal = 'dog'
 
 ---
 
-###### 11. 输出是什么？
+## 11. 输出是什么？
 
 ```javascript
 function Person(firstName, lastName) {
@@ -386,6 +386,8 @@ console.log(member.getFullName());
 - B: `SyntaxError`
 - C: `Lydia Hallie`
 - D: `undefined` `undefined`
+
+>mark
 
 <details><summary><b>答案</b></summary>
 <p>
@@ -407,7 +409,7 @@ Person.prototype.getFullName = function () {
 
 ---
 
-###### 12. 输出是什么？
+## 12. 输出是什么？
 
 ```javascript
 function Person(firstName, lastName) {
@@ -441,7 +443,7 @@ console.log(sarah)
 
 ---
 
-###### 13. 事件传播的三个阶段是什么？
+## 13. 事件传播的三个阶段是什么？
 
 - A: Target > Capturing > Bubbling
 - B: Bubbling > Target > Capturing
@@ -455,15 +457,15 @@ console.log(sarah)
 
 在**捕获**（capturing）阶段中，事件从祖先元素向下传播到目标元素。当事件达到**目标**（target）元素后，**冒泡**（bubbling）才开始。
 
-<!-- <img src="https://i.imgur.com/N18oRgd.png" width="200"> -->
+![Capturing > Target > Bubbling](https://camo.githubusercontent.com/1e3f6d3b059bbfcacaf2e694a46c5b81cae333f4/68747470733a2f2f692e696d6775722e636f6d2f4e31386f5267642e706e67)
 
 </p>
 </details>
 
 ---
 
-###### 14. 所有对象都有原型。
-
+## 14. 所有对象都有原型。
+>mark
 - A: true
 - B: false
 
@@ -479,7 +481,7 @@ console.log(sarah)
 
 ---
 
-###### 15. 输出是什么？
+## 15. 输出是什么？
 
 ```javascript
 function sum(a, b) {
@@ -508,7 +510,7 @@ JavaScript 是一种**动态类型语言**：我们不指定某些变量的类�
 
 ---
 
-###### 16. 输出是什么？
+## 16. 输出是什么？
 
 ```javascript
 let number = 0
@@ -544,8 +546,8 @@ console.log(number)
 
 ---
 
-###### 17. 输出是什么？
-
+## 17. 输出是什么？
+>mark
 ```javascript
 function getPersonInfo(one, two, three) {
   console.log(one)
@@ -568,14 +570,18 @@ getPersonInfo`${person} is ${age} years old`
 
 #### 答案: B
 
-如果使用标记模板字面量，第一个参数的值总是包含字符串的数组。其余的参数获取的是传递的表达式的值！
+标签函数的语法是函数名后面直接带一个模板字符串，并从模板字符串中的插值表达式中获取参数。第一个参数的值总是包含字符串的数组。其余的参数获取的是传递的表达式的值！
+
+上述例子第一个参数数组的第一个是`${person}`前的空格。
+
+[标签函数](https://zhuanlan.zhihu.com/p/31687266)
 
 </p>
 </details>
 
 ---
 
-###### 18. 输出是什么？
+## 18. 输出是什么？
 
 ```javascript
 function checkAge(data) {
@@ -595,6 +601,8 @@ checkAge({ age: 18 })
 - B: `You are still an adult.`
 - C: `Hmm.. You don't have an age I guess`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -611,7 +619,7 @@ checkAge({ age: 18 })
 
 ---
 
-###### 19. 输出是什么？
+## 19. 输出是什么？
 
 ```javascript
 function getAge(...args) {
@@ -626,6 +634,8 @@ getAge(21)
 - C: `"object"`
 - D: `"NaN"`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -638,7 +648,7 @@ getAge(21)
 
 ---
 
-###### 20. 输出是什么？
+## 20. 输出是什么？
 
 ```javascript
 function getAge() {
@@ -665,7 +675,7 @@ getAge()
 </p>
 </details> -->
 
-###### 21. 输出是什么？
+## 21. 输出是什么？
 
 ```javascript
 const sum = eval('10*10+5')
@@ -688,7 +698,7 @@ const sum = eval('10*10+5')
 
 ---
 
-###### 22. cool_secret 可访问多长时间？
+## 22. cool_secret 可访问多长时间？
 
 ```javascript
 sessionStorage.setItem('cool_secret', 123)
@@ -713,7 +723,7 @@ sessionStorage.setItem('cool_secret', 123)
 
 ---
 
-###### 23. 输出是什么？
+## 23. 输出是什么？
 
 ```javascript
 var num = 8
@@ -741,7 +751,7 @@ console.log(num)
 
 ---
 
-###### 24. 输出是什么？
+## 24. 输出是什么？
 
 ```javascript
 const obj = { 1: 'a', 2: 'b', 3: 'c' }
@@ -772,7 +782,7 @@ set.has(1)
 
 ---
 
-###### 25. 输出是什么？
+## 25. 输出是什么？
 
 ```javascript
 const obj = { a: 'one', b: 'two', a: 'three' }
@@ -783,6 +793,8 @@ console.log(obj)
 - B: `{ b: "two", a: "three" }`
 - C: `{ a: "three", b: "two" }`
 - D: `SyntaxError`
+
+>mark
 
 <details><summary><b>答案</b></summary>
 <p>
@@ -796,7 +808,7 @@ console.log(obj)
 
 ---
 
-###### 26. JavaScript 全局执行上下文为你做了两件事：全局对象和 this 关键字。
+## 26. JavaScript 全局执行上下文为你做了两件事：全局对象和 this 关键字。
 
 - A: true
 - B: false
@@ -804,6 +816,8 @@ console.log(obj)
 
 <details><summary><b>答案</b></summary>
 <p>
+
+>mark
 
 #### 答案: A
 
@@ -814,7 +828,7 @@ console.log(obj)
 
 ---
 
-###### 27. 输出是什么？
+## 27. 输出是什么？
 
 ```javascript
 for (let i = 1; i < 5; i++) {
@@ -840,7 +854,7 @@ for (let i = 1; i < 5; i++) {
 
 ---
 
-###### 28. 输出是什么？
+## 28. 输出是什么？
 
 ```javascript
 String.prototype.giveLydiaPizza = () => {
@@ -869,7 +883,7 @@ name.giveLydiaPizza()
 
 ---
 
-###### 29. 输出是什么？
+## 29. 输出是什么？
 
 ```javascript
 const a = {}
@@ -887,6 +901,8 @@ console.log(a[b])
 - C: `undefined`
 - D: `ReferenceError`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -903,7 +919,7 @@ console.log(a[b])
 
 ---
 
-###### 30. 输出是什么？
+## 30. 输出是什么？
 
 ```javascript
 const foo = () => console.log('First')
@@ -919,6 +935,8 @@ baz()
 - B: `First` `Third` `Second`
 - C: `Second` `First` `Third`
 - D: `Second` `Third` `First`
+
+>mark
 
 <details><summary><b>答案</b></summary>
 <p>
