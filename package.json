@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/LazyChenY/lazymr.github.io#readme",
   "devDependencies": {
-    "vuepress": "^0.8.4"
+    "vuepress": "^1.0.2"
   }
 }
