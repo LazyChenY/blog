@@ -1364,3 +1364,72 @@ string 类型是可迭代的。扩展运算符将迭代的每个字符映射成�
 
 </p>
 </details>
+
+---
+
+## 44. 输出是什么?
+
+```javascript
+function* generator(i) {
+  yield i;
+  yield i * 2;
+}
+
+const gen = generator(10);
+
+console.log(gen.next().value);
+console.log(gen.next().value);
+```
+
+- A: `[0, 10], [10, 20]`
+- B: `20, 20`
+- C: `10, 20`
+- D: `0, 10 and 10, 20`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: C
+
+常规函数调用后不能中途停止，但是，generator函数是可以中途“停止”的，然后从停止的地方继续。每次generator函数遇到`yield`关键字时，该函数都会生成其后指定的值。注意，这种情况下generator函数不返回值，而是生成值。
+
+首先，用`i`等于`10`来初始化generator函数。我们通过`next()`方法来调用该generator函数，第一次调用时`i`等于 `10`，当遇到第一个`yield`关键字时：它产生了 `i`的值，函数暂停，同时打印出`10`。
+
+然后，通过 `next()`方法再次调用该函数，它将从之前停止的地方继续,此时 `i`依然为`10`。这时它遇到第二个`yield`关键字，并产生`i * 2`的值，所以它返回`10 * 2`，即`20`。结果为`10, 20`。
+
+</p>
+</details>
+
+---
+
+Generator 函数有多种理解角度。语法上，首先可以把它理解成，Generator 函数是一个状态机，封装了多个内部状态。
+
+执行 Generator 函数会返回一个遍历器对象，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。
+形式上，Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。
+```js
+function* helloWorldGenerator() {
+  yield 'hello';
+  yield 'world';
+  return 'ending';
+}
+
+var hw = helloWorldGenerator();
+```
+上面代码定义了一个 Generator 函数helloWorldGenerator，它内部有两个yield表达式（hello和world），即该函数有三个状态：hello，world 和 return 语句（结束执行）
+调用 Generator 函数后，该函数并不执行，返回的也不是函数运行结果，而是一个指向内部状态的指针对象,也就是遍历器对象。
+
+下一步，必须调用遍历器对象的next方法，使得指针移向下一个状态。也就是说，每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield表达式（或return语句）为止。换言之，Generator 函数是分段执行的，yield表达式是暂停执行的标记，而next方法可以恢复执行。
+```js
+hw.next()
+// { value: 'hello', done: false }
+
+hw.next()
+// { value: 'world', done: false }
+
+hw.next()
+// { value: 'ending', done: true }
+
+hw.next()
+// { value: undefined, done: true }
+```
+[generator传送门](http://es6.ruanyifeng.com/#docs/generator)
