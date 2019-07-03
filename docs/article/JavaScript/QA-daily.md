@@ -228,7 +228,7 @@ console.log(d.greeting)
 
 首先，变量 `c` 的值是一个对象。接下来，我们给 `d` 分配了一个和 `c` 对象相同的引用。
 
-<!-- <img src="https://i.imgur.com/ko5k0fs.png" width="200"> -->
+<img src="https://camo.githubusercontent.com/bd30403debc9a753512d0097f47958808974525c/68747470733a2f2f692e696d6775722e636f6d2f6b6f356b3066732e706e67" width="200">
 
 因此当我们改变其中一个对象时，其实是改变了所有的对象。
 
@@ -949,23 +949,23 @@ baz()
 
 将 _callback_ 推送到 WebAPI 后，`setTimeout` 函数本身(但不是回调！)将从栈中弹出。
 
-<!-- <img src="https://i.imgur.com/X5wsHOg.png" width="200"> -->
+<img src="https://camo.githubusercontent.com/335a3d02ffb7f822628886c480a9584ace2ff931/68747470733a2f2f692e696d6775722e636f6d2f58357773484f672e706e67" width="300">
 
 现在，`foo` 被调用，打印 `"First"`。
 
-<!-- <img src="https://i.imgur.com/Pvc0dGq.png" width="200"> -->
+<img src="https://camo.githubusercontent.com/cf5f8bd460361ccee8bd2534026adbb22e2596e5/68747470733a2f2f692e696d6775722e636f6d2f507663306447712e706e67" width="300">
 
 `foo` 从栈中弹出，`baz` 被调用. 打印 `"Third"`。
 
-<!-- <img src="https://i.imgur.com/WhA2bCP.png" width="200"> -->
+<img src="https://camo.githubusercontent.com/1b97d5c5a796735746aafd7dc0119c236863eb57/68747470733a2f2f692e696d6775722e636f6d2f576841326243502e706e67" width="300">
 
 WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名为 _queue_ 的地方。
 
-<!-- <img src="https://i.imgur.com/NSnDZmU.png" width="200"> -->
+<img src="https://camo.githubusercontent.com/030dfcad68efec405301a5870e217fb374069645/68747470733a2f2f692e696d6775722e636f6d2f4e536e445a6d552e706e67" width="300">
 
 这就是事件循环开始工作的地方。一个**事件循环**查看栈和任务队列。如果栈是空的，它接受队列上的第一个元素并将其推入栈。
 
-<!-- <img src="https://i.imgur.com/uyiScAI.png" width="200"> -->
+<img src="https://camo.githubusercontent.com/8371c584d1456dea5fbe13c8c0554d75e147ea6b/68747470733a2f2f692e696d6775722e636f6d2f757969536341492e706e67" width="300">
 
 `bar` 被调用，打印 `"Second"`，然后它被栈弹出。
 
@@ -974,7 +974,7 @@ WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名�
 
 ---
 
-###### 31. 当点击按钮时，event.target是什么？
+## 31. 当点击按钮时，event.target是什么？
 
 ```html
 <div onclick="console.log('first div')">
@@ -991,6 +991,8 @@ WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名�
 - C: `button`
 - D: 一个包含所有嵌套元素的数组。
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -1003,7 +1005,7 @@ WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名�
 
 ---
 
-###### 32. 当您单击该段落时，日志输出是什么？
+## 32. 当您单击该段落时，日志输出是什么？
 
 ```html
 <div onclick="console.log('div')">
@@ -1018,6 +1020,8 @@ WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名�
 - C: `p`
 - D: `div`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -1030,7 +1034,7 @@ WebAPI 不能随时向栈内添加内容。相反，它将回调函数推到名�
 
 ---
 
-###### 33. 输出是什么？
+## 33. 输出是什么？
 
 ```javascript
 const person = { name: 'Lydia' }
@@ -1048,6 +1052,8 @@ sayHi.bind(person, 21)
 - C: `Lydia is 21` `Lydia is 21`
 - D: `Lydia is 21` `function`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -1057,12 +1063,14 @@ sayHi.bind(person, 21)
 
 `.bind` 返回函数的**副本**，但带有绑定上下文！它不是立即执行的。
 
+bind之后手动调用`sayHi.bind(person, 21)()`即可输出`Lydia is 21`
+
 </p>
 </details>
 
 ---
 
-###### 34. 输出是什么？
+## 34. 输出是什么？
 
 ```javascript
 function sayHi() {
@@ -1077,12 +1085,16 @@ typeof sayHi()
 - C: `"function"`
 - D: `"undefined"`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
 #### 答案: B
 
 `sayHi` 方法返回的是立即执行函数(IIFE)的返回值.此立即执行函数的返回值是 `0`， 类型是 `number`
+
+`(() => 0)()`是立即执行函数。
 
 参考：只有7种内置类型：`null`，`undefined`，`boolean`，`number`，`string`，`object` 和 `symbol`。 ``function`` 不是一种类型，函数是对象，它的类型是``object``。
 
@@ -1091,7 +1103,7 @@ typeof sayHi()
 
 ---
 
-###### 35. 下面哪些值是 falsy?
+## 35. 下面哪些值是 falsy?
 
 ```javascript
 0
@@ -1106,6 +1118,8 @@ undefined
 - B: `0`, `new Number(0)`, `''`, `new Boolean(false)`, `undefined`
 - C: `0`, `''`, `new Boolean(false)`, `undefined`
 - D: All of them are falsy
+
+>mark
 
 <details><summary><b>答案</b></summary>
 <p>
@@ -1130,7 +1144,7 @@ undefined
 
 ---
 
-###### 36. 输出是什么？
+## 36. 输出是什么？
 
 ```javascript
 console.log(typeof typeof 1)
@@ -1154,7 +1168,7 @@ console.log(typeof typeof 1)
 
 ---
 
-###### 37. 输出是什么？
+## 37. 输出是什么？
 
 ```javascript
 const numbers = [1, 2, 3]
@@ -1166,6 +1180,8 @@ console.log(numbers)
 - B: `[1, 2, 3, 11]`
 - C: `[1, 2, 3, 7 x empty, 11]`
 - D: `SyntaxError`
+
+>mark
 
 <details><summary><b>答案</b></summary>
 <p>
@@ -1183,7 +1199,7 @@ console.log(numbers)
 
 ---
 
-###### 38. 输出是什么？
+## 38. 输出是什么？
 
 ```javascript
 ;(() => {
@@ -1204,6 +1220,8 @@ console.log(numbers)
 - C: `1` `1` `2`
 - D: `1` `undefined` `undefined`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -1220,13 +1238,15 @@ console.log(numbers)
 
 ---
 
-###### 39. JavaScript 中的一切都是？
+## 39. JavaScript 中的一切都是？
 
 - A: 基本类型与对象
 - B: 函数与对象
 - C: 只有对象
 - D: 数字与对象
--
+
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -1241,7 +1261,7 @@ JavaScript 只有基本类型和对象。
 
 ---
 
-###### 40. 输出是什么？
+## 40. 输出是什么？
 
 ```javascript
 ;[[0, 1], [2, 3]].reduce(
@@ -1257,6 +1277,8 @@ JavaScript 只有基本类型和对象。
 - C: `[1, 2, 0, 1, 2, 3]`
 - D: `[1, 2, 6]`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -1270,7 +1292,7 @@ JavaScript 只有基本类型和对象。
 
 ---
 
-###### 41. 输出是什么？
+## 41. 输出是什么？
 
 ```javascript
 !!null
@@ -1299,7 +1321,7 @@ JavaScript 只有基本类型和对象。
 
 ---
 
-###### 42. `setInterval` 方法的返回值是什么？
+## 42. `setInterval` 方法的返回值是什么？
 
 ```javascript
 setInterval(() => console.log('Hi'), 1000)
@@ -1322,7 +1344,7 @@ setInterval(() => console.log('Hi'), 1000)
 
 ---
 
-###### 43. 输出是什么？
+## 43. 输出是什么？
 
 ```javascript
 ;[...'Lydia']

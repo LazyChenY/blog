@@ -6,6 +6,9 @@ module.exports = {
     repo: 'git@github.com:LazyChenY/blog.git',
     port: 9995,
     head: ['link', {rel: 'icon', href: '/avtor.jpeg'}],
+    markdown: {
+        lineNumbers: true
+    },
     themeConfig: {
         nav: [{
             text: 'Blog',
