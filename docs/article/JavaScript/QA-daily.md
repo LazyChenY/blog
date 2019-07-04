@@ -1386,6 +1386,8 @@ console.log(gen.next().value);
 - C: `10, 20`
 - D: `0, 10 and 10, 20`
 
+>mark
+
 <details><summary><b>答案</b></summary>
 <p>
 
@@ -1397,10 +1399,7 @@ console.log(gen.next().value);
 
 然后，通过 `next()`方法再次调用该函数，它将从之前停止的地方继续,此时 `i`依然为`10`。这时它遇到第二个`yield`关键字，并产生`i * 2`的值，所以它返回`10 * 2`，即`20`。结果为`10, 20`。
 
-</p>
-</details>
-
----
+Generator
 
 Generator 函数有多种理解角度。语法上，首先可以把它理解成，Generator 函数是一个状态机，封装了多个内部状态。
 
@@ -1433,3 +1432,336 @@ hw.next()
 // { value: undefined, done: true }
 ```
 [generator传送门](http://es6.ruanyifeng.com/#docs/generator)
+
+</p>
+</details>
+
+---
+
+## 45. 返回什么?
+
+```javascript
+const firstPromise = new Promise((res, rej) => {
+  setTimeout(res, 500, "one");
+});
+
+const secondPromise = new Promise((res, rej) => {
+  setTimeout(res, 100, "two");
+});
+
+Promise.race([firstPromise, secondPromise]).then(res => console.log(res));
+```
+
+- A: `"one"`
+- B: `"two"`
+- C: `"two" "one"`
+- D: `"one" "two"`
+
+>mark
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: B
+
+`Promise.race(iterable)` 方法返回一个promise，当我们给其传递多个promise时，一旦其中某个promise解决或拒绝，返回的promise就会解决或拒绝，始终采用第一个解决/拒绝的promise的值作为它的返回值。
+对于 `setTimeout` 方法，第一个promise(`firstPromise`)的delay时长是500ms，第二个promise(`secondPromise`)的delay时长是100ms，这意味着`secondPromise`将会先完成并且返回值为`'two'`，此时打印出的就是`'two'`。
+
+</p>
+</details>
+
+---
+
+## 46. 输出什么?
+
+```javascript
+let person = { name: "Lydia" };
+const members = [person];
+person = null;
+
+console.log(members);
+```
+
+- A: `null`
+- B: `[null]`
+- C: `[{}]`
+- D: `[{ name: "Lydia" }]`
+
+>mark
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: D
+
+首先，我们声明一个变量 `person`，并给其赋值一个包含`name`属性的对象。
+
+<img src="https://camo.githubusercontent.com/18ec11730a406fb1ea8fe7e4f0cea77d8fe33dd0/68747470733a2f2f692e696d6775722e636f6d2f544d4c314d62532e706e67" width="200">
+
+然后，我们声明了一个变量 `members`，并将该数组的第一个元素赋值为`person`变量。对于基本类型，赋值是值的拷贝，而对于引用类型，赋值则是引用地址的拷贝，注意拷贝后的引用地址和原引用地址不是同一个，二者只是指向同一个引用类型。
+
+<img src="https://camo.githubusercontent.com/a775ede4cce9b143614b05f06e4afac49ee4aab0/68747470733a2f2f692e696d6775722e636f6d2f465347354b33462e706e67" width="300">
+
+然后我们将变量 `person` 再次赋值为`null`。
+
+<img src="https://camo.githubusercontent.com/a13998111c61325f557b40db37d77a054fa76407/68747470733a2f2f692e696d6775722e636f6d2f73596a63734d542e706e67" width="300">
+
+我们改变了 `person` 变量的引用地址，使其不再指向包含`name`属性的对象，而 `members` 数组中第一个元素的引用地址和 `person` 变量是不同的，它仍然指向原对象，所以当我们打印时 `members`，包含`name`属性的对象将被打印。
+
+</p>
+</details>
+
+---
+
+## 47. 输出什么?
+
+```javascript
+const person = {
+  name: "Lydia",
+  age: 21
+};
+
+for (const item in person) {
+  console.log(item);
+}
+```
+
+- A: `{ name: "Lydia" }, { age: 21 }`
+- B: `"name", "age"`
+- C: `"Lydia", 21`
+- D: `["name", "Lydia"], ["age", 21]`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: B
+
+使用`for-in`循环，我们可以遍历对象的键，在本例中为`name`和`age`，在js引擎中，对象的键是字符串（如果它们不是Symbol），在每个循环中，我们将`item`的值设置为它迭代的当前键。 首先，`item`等于`name`，并记录，然后，`item`等于`age`，并被记录。
+
+</p>
+</details>
+
+---
+
+## 48. 输出什么?
+
+```javascript
+console.log(3 + 4 + "5");
+```
+
+- A: `"345"`
+- B: `"75"`
+- C: `12`
+- D: `"12"`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: B
+
+当所有运算符的优先级相同时，计算表达式需要确定运算符的结合顺序，即从右到左还是从左往右。在这个例子中，我们只有一类运算符`+`，对于加法来说，结合顺序就是从左到右。
+
+`3 + 4`先被计算，值为`7`。`7 + '5'` 结果为 `"75"`，因为不同类型相加时存在强制转换，当number类型与string类型相加时，number类型将会被转换为string，因此数值`7`将会被转换为`'7'`，参照第十五题。字符串可以通过`+`号来连接，因此`"7" + "5"` 结果为 `"75"`。
+
+</p>
+</details>
+
+---
+
+## 49. `num`的值是多少?
+
+```javascript
+const num = parseInt("7*6", 10);
+```
+
+- A: `42`
+- B: `"42"`
+- C: `7`
+- D: `NaN`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: C
+
+只有字符串中的第一个有效数字将会基于基数被转换， `parseInt(string, radix)`的第二个参数`radix`，其指定了第一个参数`string`的基数，可能是二进制，八进制，十六进制等等，但是返回值始终是十进制。
+该方法会检查字符串中的字符是否有效，一旦遇到一个非有效数字的字符，就会停止解析并直接忽略后面的字符。
+
+`*`号不是一个有效数字，所以只会将字符`"7"`转换为十进制的`7`，所以`num` 的值是 `7`。
+
+</p>
+</details>
+
+---
+
+## 50. 输出什么?
+
+```javascript
+[1, 2, 3].map(num => {
+  if (typeof num === "number") return;
+  return num * 2;
+});
+```
+
+- A: `[]`
+- B: `[null, null, null]`
+- C: `[undefined, undefined, undefined]`
+- D: `[ 3 x empty ]`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: C
+
+映射数组时，`num`的值等于它当前循环的元素。上述数组中元素是数字，因此if语句`typeof num === “number”`的条件为`true`，map函数将创建一个新数组并插入从函数返回的值。
+
+但是，我们没有返回值，当不从函数返回值时，函数默认返回`undefined`。 对于数组中的每个元素，都会调用函数块，因此对于每个元素，都返回的是`undefined`。
+
+</p>
+</details>
+
+---
+
+## 51. 输出什么?
+
+```javascript
+function getInfo(member, year) {
+  member.name = "Lydia";
+  year = "1998";
+}
+
+const person = { name: "Sarah" };
+const birthYear = "1997";
+
+getInfo(person, birthYear);
+
+console.log(person, birthYear);
+```
+
+- A: `{ name: "Lydia" }, "1997"`
+- B: `{ name: "Sarah" }, "1998"`
+- C: `{ name: "Lydia" }, "1998"`
+- D: `{ name: "Sarah" }, "1997"`
+
+>mark
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: A
+
+函数参数的传值类似于赋值，如果参数是基本类型，传参时传的是值，如果参数是引用类型，那么传参时传的则是引用地址（参见第46题）
+
+变量 `birthYear` 引用了值`"1997"`，参数`year`也引用了值`“1997”`，但`year`与`birthYear`引用的值不是同一个。 当我们通过将`year`设置为`“1998”`来更新`year`的值时，我们只更新`year`的值。 `birthYear`仍然等于`“1997”`。
+
+`person`是个对象，属于引用类型。参数 `member` 的引用是从 `person` 拷贝过来的，因此二者指向的是同一个对象，我们通过任何一个引用去修改该对象，另一个获取到的都将是修改后的。因此当我们通过 `member` 修改该对象属性时， `person` 的属性也被修改， 所以`person`对象的`name` 属性是`"Lydia"`。
+
+</p>
+</details>
+
+---
+
+## 52. 输出什么?
+
+```javascript
+function greeting() {
+  throw "Hello world!";
+}
+
+function sayHi() {
+  try {
+    const data = greeting();
+    console.log("It worked!", data);
+  } catch (e) {
+    console.log("Oh no an error!", e);
+  }
+}
+
+sayHi();
+```
+
+- A: `"It worked! Hello world!"`
+- B: `"Oh no an error: undefined`
+- C: `SyntaxError: can only throw Error objects`
+- D: `"Oh no an error: Hello world!`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: D
+
+通过 `throw` 语句，我们可以创建自定义错误。使用该语句，你可以抛出异常，异常可能是一个<b>string</b>、<b>number</b>、<b>boolean</b> 或者 <b>object</b>，上述异常是字符串`'Hello world'`。
+
+通过 `catch` 语句，我们可以指定在 `try` 语句中抛出异常时怎么做。上述例子中，一个字符串的异常 `'Hello world'` 被抛出， `catch` 中的 `e` 即指该字符串，所以打印出 `'Oh an error: Hello world'`
+
+</p>
+</details>
+
+---
+
+## 53. 输出什么?
+
+```javascript
+function Car() {
+  this.make = "Lamborghini";
+  return { make: "Maserati" };
+}
+
+const myCar = new Car();
+console.log(myCar.make);
+```
+
+- A: `"Lamborghini"`
+- B: `"Maserati"`
+- C: `ReferenceError`
+- D: `TypeError`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: B
+
+返回属性时，属性的值等于_returned_的值，而不是构造函数中设置的值。 我们返回的是字符串 `"Maserati"`，所以 `myCar.make` 为 `"Maserati"`。
+
+</p>
+</details>
+
+---
+
+## 54. 输出什么?
+
+```javascript
+(() => {
+  let x = (y = 10);
+})();
+
+console.log(typeof x);
+console.log(typeof y);
+```
+
+- A: `"undefined", "number"`
+- B: `"number", "number"`
+- C: `"object", "number"`
+- D: `"number", "undefined"`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: A
+
+`let x = y = 10;` 实际上是以下的简写:
+
+```javascript
+y = 10;
+let x = y;
+```
+当我们给 `y` 赋值为 `10` 时，实际上是给全局对象(浏览器中为 `window`, Node下为 `global` ）添加了一个属性 `y`, 在浏览器中时，此时`window.y`为 `10`。
+
+然后，我们声明了一个变量 `x` ，其值为 `y`，即 `10`。使用 `let` 声明的变量是一个块级作用域变量，仅在声明其的块级作用域中可用，上述例子的块级作用域是一个立即执行函数 (IIFE)。当使用操作符 `typeof` 时，我们是在试图在 `x` 的声明块之外访问 `x` ，当然 `x` 是未定义的。对于尚未定义或尚未赋值的变量， `console.log（typeof x）`将返回`“undefined”`。
+
+当然，我们创建了全局变量 `y` 且其值为 `10`, 该变量在我们代码中的任务位置都可用，所以`console.log(typeof y)` 打印出的事 `"number"`
+
+</p>
+</details>
+
+---
