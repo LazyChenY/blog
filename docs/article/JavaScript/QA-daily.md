@@ -1765,3 +1765,324 @@ let x = y;
 </details>
 
 ---
+
+## 55. 输出什么?
+
+```javascript
+class Dog {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+Dog.prototype.bark = function() {
+  console.log(`Woof I am ${this.name}`);
+};
+
+const pet = new Dog("Mara");
+
+pet.bark();
+
+delete Dog.prototype.bark;
+
+pet.bark();
+```
+
+- A: `"Woof I am Mara"`, `TypeError`
+- B: `"Woof I am Mara"`,`"Woof I am Mara"`
+- C: `"Woof I am Mara"`, `undefined`
+- D: `TypeError`, `TypeError`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: A
+
+我们可以用`delete`关键字删除对象的属性，对原型也是适用的。删除了原型的属性后，该属性在原型链上就不可用了。在本例中，函数`bark`在执行了`delete Dog.prototype.bark`后不可用, 然而后面的代码还在调用它。
+
+当我们尝试调用一个不存在的函数时`TypeError`异常会被抛出。在本例中就是 `TypeError: pet.bark is not a function`，因为`pet.bark`是`undefined`.
+
+</p>
+</details>
+
+---
+
+## 56. 输出什么?
+
+```javascript
+const set = new Set([1, 1, 2, 3, 4]);
+
+console.log(set);
+```
+
+- A: `[1, 1, 2, 3, 4]`
+- B: `[1, 2, 3, 4]`
+- C: `{1, 1, 2, 3, 4}`
+- D: `{1, 2, 3, 4}`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: D
+
+`Set`对象是一个独一无二值的集合：即同一个值在其中仅出现一次。
+
+我们传入了数组`[1, 1, 2, 3, 4]`，它有一个重复值`1`。因为一个集合里不能有两个重复的值，其中一个就被移除了。所以结果是 `{1, 2, 3, 4}`.
+
+</p>
+</details>
+
+---
+
+## 57. 输出什么?
+
+```javascript
+// counter.js
+let counter = 10;
+export default counter;
+```
+
+```javascript
+// index.js
+import myCounter from "./counter";
+
+myCounter += 1;
+
+console.log(myCounter);
+```
+
+- A: `10`
+- B: `11`
+- C: `Error`
+- D: `NaN`
+
+>mark
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: C
+
+通过`import`命令加载的变量是只读的，`import`的本质是引入接口，不允许在加载模块的脚本里改写接口。
+
+当我们给`myCounter`增加一个值的时候会抛出一个异常： `myCounter`是只读的，不能被修改。
+```js
+import {a} from './xxx.js'
+
+a = {}; // Syntax Error : 'a' is read-only;
+```
+上面代码中，脚本加载了变量a，对其重新赋值就会报错，因为a是一个只读的接口。但是，如果a是一个对象，改写a的属性是允许的。
+```js
+import {a} from './xxx.js'
+
+a.foo = 'hello'; // 合法操作
+```
+上面代码中，a的属性可以成功改写，并且其他模块也可以读到改写后的值。不过，这种写法很难查错，建议凡是输入的变量，都当作完全只读，轻易不要改变它的属性。
+
+</p>
+</details>
+
+---
+
+## 58. 输出什么?
+
+```javascript
+const name = "Lydia";
+age = 21;
+
+console.log(delete name);
+console.log(delete age);
+```
+
+- A: `false`, `true`
+- B: `"Lydia"`, `21`
+- C: `true`, `true`
+- D: `undefined`, `undefined`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: A
+
+`delete` 操作符用于删除对象的某个属性, 它返回一个布尔值：`true`指删除成功，否则返回`false`。通过 `var`, `const` 或 `let` 关键字声明的变量不能用 `delete` 操作符来删除。
+
+`name`变量由`const`关键字声明，所以删除不成功:返回 `false`。而我们设定`age`等于`21`时,我们实际上添加了一个名为`age`的属性给全局对象。对象中的属性是可以删除的，所以`delete age`返回`true`.
+
+</p>
+</details>
+
+---
+
+## 59. 输出什么?
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const [y] = numbers;
+
+console.log(y);
+```
+
+- A: `[[1, 2, 3, 4, 5]]`
+- B: `[1, 2, 3, 4, 5]`
+- C: `1`
+- D: `[1]`
+
+>mark
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: C
+
+
+我们可以通过解构赋值来解析来自数组或对象属性的值，比如说：
+
+```javascript
+[a, b] = [1, 2];
+```
+
+<img src="https://camo.githubusercontent.com/8903a861b474f8b63da9d0d46d14a74d9e2db039/68747470733a2f2f692e696d6775722e636f6d2f41444670566f702e706e67" width="200">
+
+`a`的值现在是`1`，`b`的值现在是`2`。上述例子中:
+
+```javascript
+[y] = [1, 2, 3, 4, 5];
+```
+
+<img src="https://camo.githubusercontent.com/3474488027d64c5fc9955ab5be7c3a88d1254449/68747470733a2f2f692e696d6775722e636f6d2f4e7a476b4d4e6b2e706e67" width="200">
+
+也就是说，`y`等于数组的第一个值就是数字`1`。
+
+</p>
+</details>
+
+---
+
+## 60. 输出什么?
+
+```javascript
+const user = { name: "Lydia", age: 21 };
+const admin = { admin: true, ...user };
+
+console.log(admin);
+```
+
+- A: `{ admin: true, user: { name: "Lydia", age: 21 } }`
+- B: `{ admin: true, name: "Lydia", age: 21 }`
+- C: `{ admin: true, user: ["Lydia", 21] }`
+- D: `{ admin: true }`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: B
+
+扩展运算符`...`为对象的组合提供了可能。你可以复制对象中的键值对，然后把它们加到另一个对象里去。在本例中，我们复制了`user`对象键值对，然后把它们加入到`admin`对象中。`admin`对象就拥有了这些键值对，所以结果为`{ admin: true, name: "Lydia", age: 21 }`
+
+</p>
+</details>
+
+---
+
+## 61. 输出什么?
+
+```javascript
+const person = { name: "Lydia" };
+
+Object.defineProperty(person, "age", { value: 21 });
+
+console.log(person);
+console.log(Object.keys(person));
+```
+
+- A: `{ name: "Lydia", age: 21 }`, `["name", "age"]`
+- B: `{ name: "Lydia", age: 21 }`, `["name"]`
+- C: `{ name: "Lydia"}`, `["name", "age"]`
+- D: `{ name: "Lydia"}`, `["age"]`
+
+>mark
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: B
+
+通过`defineProperty`方法，我们可以给对象添加一个新属性，或者修改已经存在的属性。通过`defineProperty`方法给对象添加的属性默认为 _不可枚举(not enumerable)_ ，`Object.keys`方法仅返回对象中 _可枚举(enumerable)_ 的属性，因此只打印了`"name"`.
+
+用`defineProperty`方法添加的属性默认不可变。你可以通过`writable`, `configurable` 和 `enumerable`属性来改变这一行为。这样的话， 相比于自己添加的属性，`defineProperty`方法添加的属性有了更多的控制权。
+
+</p>
+</details>
+
+---
+
+## 62. 输出什么?
+
+```javascript
+const settings = {
+  username: "lydiahallie",
+  level: 19,
+  health: 90
+};
+
+const data = JSON.stringify(settings, ["level", "health"]);
+console.log(data);
+```
+
+- A: `"{"level":19, "health":90}"`
+- B: `"{"username": "lydiahallie"}"`
+- C: `"["level", "health"]"`
+- D: `"{"username": "lydiahallie", "level":19, "health":90}"`
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: A
+
+`JSON.stringify(value[, replacer)`的第二个参数可以是个函数或数组，用以控制哪些值如何被转换为字符串。
+The second argument of `JSON.stringify` is the _replacer_. The replacer can either be a function or an array, and lets you control what and how the values should be stringified.
+
+如果`replacer`是个数组，那么就只有包含在数组中的属性将会被转化为字符串。在本例中，只有名为`"level"` 和 `"health"` 的属性被包括进来， `"username"`则被排除在外。 `data` 就等于 `"{"level":19, "health":90}"`
+
+如果 `replacer` 是个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理，函数返回的值会成为这个属性的值，最终体现在转化后的JSON字符串中。如果函数返回值为`undefined`，则该属性会被排除在外。（译者注：Chrome下，经过实验，如果所有属性均返回同一个值的时候有异常，会直接将返回值作为结果输出而不会输出JSON字符串）
+
+如果该参数为null或者未提供，则对象所有的属性都会被序列化。
+
+</p>
+</details>
+
+---
+
+## 63. 输出什么?
+
+```javascript
+let num = 10;
+
+const increaseNumber = () => num++;
+const increasePassedNumber = number => number++;
+
+const num1 = increaseNumber();
+const num2 = increasePassedNumber(num1);
+
+console.log(num1);
+console.log(num2);
+```
+
+- A: `10`, `10`
+- B: `10`, `11`
+- C: `11`, `11`
+- D: `11`, `12`
+
+>mark
+
+<details><summary><b>答案</b></summary>
+<p>
+
+#### 答案: A
+
+一元操作符 `++` 先返回操作值, 再累加操作值。`num1`的值是`10`, 因为`increaseNumber`函数首先返回`num`的值，也就是`10`，随后再进行 `num`的累加。
+
+`num2`是`10`因为我们将 `num1`传入`increasePassedNumber`. `number`等于`10`（`num1`的值同上） `number`是`10`，所以`num2`也是`10`。
+
+</p>
+</details>
