@@ -2089,41 +2089,7 @@ console.log(num2);
 
 ---
 
-###### 63. 输出是什么?
-
-```javascript
-let num = 10;
-
-const increaseNumber = () => num++;
-const increasePassedNumber = number => number++;
-
-const num1 = increaseNumber();
-const num2 = increasePassedNumber(num1);
-
-console.log(num1);
-console.log(num2);
-```
-
-- A: `10`, `10`
-- B: `10`, `11`
-- C: `11`, `11`
-- D: `11`, `12`
-
-<details><summary><b>答案</b></summary>
-<p>
-
-#### 答案: A
-
-一元操作符 `++` _先返回_ 操作值, _再累加_ 操作值。`num1`的值是`10`, 因为`increaseNumber`函数首先返回`num`的值，也就是`10`，随后再进行 `num`的累加。
-
-`num2`是`10`因为我们将 `num1`传入`increasePassedNumber`. `number`等于`10`（`num1`的值。同样道理，`++` _先返回_ 操作值, _再累加_ 操作值。） `number`是`10`，所以`num2`也是`10`.
-
-</p>
-</details>
-
----
-
-###### 64. 输出什么?
+## 64. 输出什么?
 
 ```javascript
 const value = { number: 10 };
@@ -2148,7 +2114,7 @@ multiply(value);
 
 #### 答案: C
 
-在ES6中，我们可以使用默认值初始化参数。如果没有给函数传参，或者传的参值为 `"undefined"` ，那么参数的值将是默认值。上述例子中，我们将 `value` 对象进行了解构并传到一个新对象中，因此 `x` 的默认值为 `{number：10}` 。
+在ES6中，我们可以使用默认值初始化参数。如果没有给函数传参，或者传的参值为 `"undefined"` ，那么参数的值将是默认值。上述例子中，我们将 `value` 对象进行了解构并传到一个新对象中，因此 `x` 的默认值为 `{number：10}`。
 
 默认参数在调用时才会进行计算，每次调用函数时，都会创建一个新的对象。我们前两次调用 `multiply` 函数且不传递值，那么每一次 `x` 的默认值都为 `{number：10}` ，因此打印出该数字的乘积值为`20`。
 
@@ -2161,7 +2127,7 @@ multiply(value);
 
 ---
 
-###### 65. 输出什么?
+## 65. 输出什么?
 
 ```javascript
 [1, 2, 3, 4].reduce((x, y) => console.log(x, y));
@@ -2200,7 +2166,7 @@ multiply(value);
   
 ---
 
-###### 66. 使用哪个构造函数可以成功继承`Dog`类?
+## 66. 使用哪个构造函数可以成功继承`Dog`类?
 
 ```javascript
 class Dog {
@@ -2253,7 +2219,7 @@ class Labrador extends Dog {
 
 ---
 
-###### 67. 输出什么?
+## 67. 输出什么?
 
 ```javascript
 // index.js
@@ -2285,7 +2251,7 @@ export const sum = (a, b) => a + b;
 
 ---
 
-###### 68. 输出什么?
+## 68. 输出什么?
 
 ```javascript
 console.log(Number(2) === Number(2))
@@ -2310,7 +2276,7 @@ console.log(Symbol('foo') === Symbol('foo'))
 
 ---
 
-###### 69. 输出什么?
+## 69. 输出什么?
 
 ```javascript
 const name = "Lydia Hallie"
