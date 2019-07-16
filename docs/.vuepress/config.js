@@ -24,6 +24,8 @@ module.exports = {
         sidebar: {
             '/article/': [
                 'JavaScript/QA-daily',
+                'JavaScript/QA-interview',
+                'Other/functional-programming',
                 'JavaScript/Class',
                 'JavaScript/clipboard',
                 'JavaScript/screen/screen',
