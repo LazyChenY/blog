@@ -2,10 +2,10 @@ module.exports = {
     title: "Lazymr's blog",
     dest: './dist',
     base: '/blog/',
-    description: 'Frontend JavaScript CSS',
+    description: 'Stay Hungry, Stay Foolish',
     repo: 'git@github.com:LazyChenY/blog.git',
     port: 9995,
-    head: ['link', {rel: 'icon', href: '/avtor.jpeg'}],
+    head: ['link', {rel: 'icon', href: '/avtor.jpg'}],
     markdown: {
         lineNumbers: true
     },

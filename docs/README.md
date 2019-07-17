@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /avator.jpeg
+heroImage: /avator.jpg
 actionText: 😊 Get More →
 actionLink: /article/JavaScript/QA-daily
 ---
