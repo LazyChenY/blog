@@ -1,4 +1,4 @@
-## Basic knowledge
+## 20个基础问题
 [原地址](https://juejin.im/post/5d124a12f265da1b9163a28d)
 
 ### 1. `new`的实现原理是什么？
@@ -261,11 +261,57 @@ console.log(obj2) // {name: "lazy", age: 16, feature: ["beauty", "smart"], time:
 5. 会忽略 `symbol`
 6. 会忽略 `undefined`
 
-方法二：实现一个`deepClone`函数
+方法二：实现一个`deepClone`函数, 思路如下：
 1. 如果是基本数据类型，直接返回
 2. 如果是 `RegExp` 或者 `Date` 类型，返回对应类型
 3. 如果是复杂数据类型，递归。
 4. 考虑循环引用的问题
+
+以下是一种简易实现思路：
+```js
+function deepClone(obj, hash = new WeakMap()) {
+    if (obj instanceof RegExp) {
+        return new RegExp(obj)
+    }
+    if (obj instanceof Date) {
+        return new Date(obj)
+    }
+    if (obj === null || typeof obj !== 'object') {
+        return obj
+    }
+    if (hash.has(obj)) {
+        return hash.get(obj)
+    }
+    let t = new obj.constructor
+    hash.set(obj, t)
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            t[key] = deepClone(obj[key], hash)
+        }
+    }
+    return t
+}
+var obj = {
+    name: 'lazy',
+    age: 16,
+    feature: ['beauty', 'smart'],
+    sayHi: function () {
+        console.log('hi')
+    },
+    time: new Date(),
+    myReg: /\d{5}/,
+    flag: Symbol('foo'),
+    boyfriend: undefined
+}
+var obj2 = deepClone(obj)
+
+obj.name = 'chen'
+obj.feature.push('rich')
+
+console.log(obj2)
+```
+
+[更多关于WeakMap](weakmap.html)
 
 </details>
 
