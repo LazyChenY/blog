@@ -27,6 +27,7 @@ module.exports = {
                 'JavaScript/QA-interview',
                 'Other/functional-programming',
                 'JavaScript/Class',
+                'JavaScript/weakMap',
                 'JavaScript/clipboard',
                 'JavaScript/screen/screen',
                 'JavaScript/extension',
