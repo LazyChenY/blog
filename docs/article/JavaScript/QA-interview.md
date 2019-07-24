@@ -390,23 +390,36 @@ console.log(obj) // {name: "lazy", age: 12}
 </p>
 </details>
 
-<!-- ### n. 问题？
+### 5. 如何让 `(a == 1 && a == 2 && a == 3)` 的值为true？？
 
 <br/>
 
-```javascript
-//
-```
+<details><summary><b>查看解析</b></summary>
+<p>
 
-- A: `123`
-- B: `456`
-- C: `undefined`
-- D: `ReferenceError`
+`a == 1 && a == 2 && a == 3` 的值意味着其不可能是基本数据类型。
+
+操作符`==`在左右数据类型不一致时，会先进行隐式转换，我们可利用这一点来实现
+
+ `a` 是复杂数据类型的话，JS 中复杂数据类型只有 `object`，回忆一下，`Object` 转换为原始类型会调用什么方法？
+* 如果部署了 `[Symbol.toPrimitive]` 接口，那么调用此接口，若返回的不是基本数据类型，抛出错误。
+* 如果没有部署 `[Symbol.toPrimitive]` 接口，那么根据要转换的类型，先调用 `valueOf` / `toString`
+
+
+
+</p>
+</details>
+
+---
+<!-- 
+### 5. 问题？
+
+<br/>
 
 <details><summary><b>查看解析</b></summary>
 <p>
 详情
 </p>
 </details>
-
---- -->
+---
+-->

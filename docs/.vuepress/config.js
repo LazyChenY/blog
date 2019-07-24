@@ -26,6 +26,7 @@ module.exports = {
                 'JavaScript/QA-daily',
                 'JavaScript/QA-interview',
                 'Other/functional-programming',
+                'JavaScript/curring',
                 'JavaScript/Class',
                 'JavaScript/weakMap',
                 'JavaScript/clipboard',
