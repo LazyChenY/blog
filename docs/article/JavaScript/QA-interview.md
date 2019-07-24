@@ -284,6 +284,7 @@ function deepClone(obj, hash = new WeakMap()) {
     }
     let t = new obj.constructor
     hash.set(obj, t)
+    // for...in语句以任意顺序遍历一个对象自有的、继承的、可枚举的、非Symbol的属性。对于每个不同的属性，语句都会被执行。
     for (let key in obj) {
         if (obj.hasOwnProperty(key)) {
             t[key] = deepClone(obj[key], hash)
@@ -315,8 +316,81 @@ console.log(obj2)
 
 </details>
 
-<!-- ---
-### n. 问题？
+---
+### 4. `call`/`apply` 的实现原理是什么？？
+
+<br/>
+
+<details><summary><b>查看解析</b></summary>
+<p>
+`call` 和 `apply` 的功能相同，都是改变 this 的执行，并立即执行函数。区别在于传参方式不同。
+
+* `func.call(thisArg, arg1, arg2, ...)`：第一个参数是 this 指向的对象，其它参数依次传入。
+* `func.apply(thisArg, [argsArray])`：第一个参数是 this 指向的对象，第二个参数是数组或类数组。
+
+
+一起思考一下，如何模拟实现 `call` ？
+首先，我们知道，函数都可以调用 `call`，说明 `call` 是函数原型上的方法，所有的实例都可以调用。即: `Function.prototype.call`。
+
+在 `call` 方法中获取调用`call`()函数
+如果第一个参数没有传入，那么默认指向 window / global(非严格模式)
+传入 `call` 的第一个参数是 this 指向的对象，根据隐式绑定的规则，我们知道 `obj.foo()`, `foo()` 中的 this 指向 obj;因此我们可以这样调用函数 `thisArgs.func(...args)`
+返回执行结果
+
+call
+```js
+Function.prototype.imitateCall = function () {
+    let [thisArg, ...args] = [...arguments]
+    if (!thisArg) {
+        thisArg = typeof window === 'undefined' ? 'global' : window
+    }
+    thisArg.func = this
+    let result = thisArg.func(...args)
+    delete thisArg.func
+    return result
+}
+var obj = {
+    name: 'lazy'
+}
+function test (age, sex) {
+    this.age = age
+    this.sex = sex
+}
+test.imitateCall(obj, 12, 'male')
+console.log(obj) // {name: "lazy", age: 12, sex: "male"}
+```
+
+apply
+```js
+Function.prototype.imitateApply = function (thisArg, rest) {
+    let result = null
+    if (!thisArg) {
+        thisArg = typeof window === 'undefined' ? 'global' : window
+    }
+    thisArg.func = this
+    if (!rest) {
+        result = thisArg.func()
+    } else {
+        result = thisArg.func(...rest)
+    }
+    delete thisArg.func
+    return result
+}
+var obj = {
+    name: 'lazy'
+}
+function test (age, sex) {
+    this.age = age
+    this.sex = sex
+}
+test.imitateApply(obj, ['16', 'male'])
+console.log(obj) // {name: "lazy", age: 12}
+```
+
+</p>
+</details>
+
+<!-- ### n. 问题？
 
 <br/>
 
@@ -333,6 +407,6 @@ console.log(obj2)
 <p>
 详情
 </p>
-</details> -->
+</details>
 
----
+--- -->
