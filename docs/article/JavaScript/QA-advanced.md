@@ -1,5 +1,5 @@
-## 20个基础问题
-[原地址](https://juejin.im/post/5d124a12f265da1b9163a28d)
+## 前端进阶问题
+不定期更新的前端进阶问题，刷新你的知识，或者帮助你的 coding 面试！
 
 ### 1. `new`的实现原理是什么？
 
@@ -397,16 +397,52 @@ console.log(obj) // {name: "lazy", age: 12}
 <details><summary><b>查看解析</b></summary>
 <p>
 
-`a == 1 && a == 2 && a == 3` 的值意味着其不可能是基本数据类型。
-
 操作符`==`在左右数据类型不一致时，会先进行隐式转换，我们可利用这一点来实现
 
- `a` 是复杂数据类型的话，JS 中复杂数据类型只有 `object`，回忆一下，`Object` 转换为原始类型会调用什么方法？
+`a == 1 && a == 2 && a == 3` ，这意味着`a`不可能是基本数据类型, 那么 `a` 就是 `object`，回忆一下，`Object` 转换为原始值会调用什么方法？
 * 如果部署了 `[Symbol.toPrimitive]` 接口，那么调用此接口，若返回的不是基本数据类型，抛出错误。
-* 如果没有部署 `[Symbol.toPrimitive]` 接口，那么根据要转换的类型，先调用 `valueOf` / `toString`
+* 如果没有部署 `[Symbol.toPrimitive]` 接口，那么根据要转换的类型，调用 `valueOf` 或者 `toString`
 
+1. 部署`[Symbol.toPrimitive]`
+`Symbol.toPrimitive` 是一个内置的 `Symbol` 值，它是作为对象的函数值属性存在的，当一个对象转换为对应的原始值时，会调用此函数。
+```js
+let a = {
+    [Symbol.toPrimitive]: (function(hint) {
+        let i = 1
+        // 通过闭包，i不会被回收
+        return function() {
+            return i++
+        }
+    })()
+}
+```
+2. `Array`转换为原始值
+数组的 `toString` 方法默认调用数组的 `join` 方法：
+```js
+var arr = [1, 2, 3]
+arr.toString() // 1,2,3
+```
 
+我们可以重写`join`方法
+```js
+var arr = [1, 2, 3]
+arr.join = arr.shift
 
+console.log(a == 1 && a == 2 && a == 3) // true
+```
+3. 数据劫持（`Proxy`）
+`Proxy(target, handler)` 对象用于定义基本操作的自定义行为（如属性查找，赋值，枚举，函数调用等）。
+
+`Proxy`对象执行隐式转换时调用的 `valueOf`/`toString`实质都是调用的`handler`中的`get`方法, 如果没有`get`方法，则调用继承自`Object`的.
+```js
+var a = new Proxy({}, {
+    i: 1,
+    get: function () {
+        return () => this.i++
+    }
+})
+```
+[更多关于Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 </p>
 </details>
 
@@ -423,3 +459,7 @@ console.log(obj) // {name: "lazy", age: 12}
 </details>
 ---
 -->
+
+问题来源参考但不限于以下：
+
+[这儿有20道大厂面试题等你查收](https://juejin.im/post/5d124a12f265da1b9163a28d)
