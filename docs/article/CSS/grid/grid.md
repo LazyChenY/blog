@@ -154,18 +154,97 @@ Grid 布局的属性分成两类。一类定义在容器上面，称为容器属
 
 传统的十二网格布局，写起来也很容易: `grid-template-columns: repeat(12, 1fr);`
 
-### 3.grid-row-gap,grid-column-gap,grid-gap
+### 3.row-gap,column-gap,gap
+`row-gap`属性设置行与行的间隔（行间距），`column-gap`属性设置列与列的间隔（列间距）。`gap`属性是`column-gap`和`row-gap`的合并简写形式，语法如下:
+
+ `grid-gap: <grid-row-gap> <grid-column-gap>;`
+```css
+row-gap: 20px;
+column-gap: 20px;
+/* 上下两种写法是一样的 */
+gap: 20px 20px; 
+```
+如果`gap`省略了第二个值，浏览器认为第二个值等于第一个值。
 ### 4.grid-template-areas
+网格布局允许指定"区域"（area），一个区域由单个或多个单元格组成。grid-template-areas属性用于定义区域。
+```css
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-areas: 'a b c'
+                       'd e f'
+                       'g h i';
+}
+```
+上面代码先划分出9个单元格，然后将其定名为a到i的九个区域，分别对应这九个单元格。
+
+多个单元格合并成一个区域的写法如下。
+```css
+grid-template-areas: 'a a a'
+                     'b b b'
+                     'c c c';
+```
+上面代码将9个单元格分成a、b、c三个区域。
+
+下面是一个布局实例。
+```css
+grid-template-areas: "header header header"
+                     "main main sidebar"
+                     "footer footer footer";
+```
+上面代码中，顶部是页眉区域header，底部是页脚区域footer，中间部分则为main和sidebar。
+
+如果某些区域不需要指定成区域，则使用"点"（`.`）表示。
+```css
+grid-template-areas: 'a . c'
+                     'd . f'
+                     'g . i';
+```
+上面代码中，中间一列为点，表示没有用到该单元格，或者该单元格不属于任何区域。
+
+注意，区域的命名会影响到网格线。每个区域的起始网格线，会自动命名为`区域名-start`，终止网格线自动命名为`区域名-end`。比如，区域名为header，则起始位置的水平网格线和垂直网格线叫做`header-start`，终止位置的水平网格线和垂直网格线叫做`header-end`。
+
 ### 5.grid-auto-flow
+划分网格以后，容器的子元素会按照顺序，自动放置在每一个网格。默认的放置顺序是`row`， 即"先行后列"，即先填满第一行，再开始放入第二行，以此类推。也可以将它设成`column`，变成"先列后行"。
+
+`grid-auto-flow`属性除了设置成`row`和`column`，还可以设成`row dense`和`column dense`。dense翻译过来稠密的意思，这两个值主要用于，某些项目指定位置以后，剩下的项目怎么自动放置, 是否稠密放置，具体不好描述，请看[grid-auto-flow示例](https://codepen.io/LazyChen/pen/pMRWbO)。
+
 ### 6.justify-items，align-items，place-items
 ### 7.justify-content，align-content，place-content
 ### 8.grid-auto-columns，grid-auto-rows
-### 8.grid-template，grid
+### 9.grid-template，grid
 
 ## 四. 项目属性
+### 1.grid-column-start，grid-column-end，grid-row-start，grid-row-end
+### 2.grid-column，grid-row
+### 3.grid-area
+### 4.justify-self，align-self，place-self 
 
 ## 五. 结语
 
 ### 兼容性
 
-### 参考引用
+![兼容性](./compatibility.jpg)
+
+[caniuse](https://caniuse.com/#search=grid)
+
+### 使用场景
+
+flex在响应式布局中是很关键的，它是内容驱动型的布局。不需要预先知道会有什么内容，可以设定元素如何分配剩余的空间以及在空间不足的时候如何表现。显得较为强大的是一维布局的能力，而grid优势在于二维布局, 这也是他们设计的初衷。
+
+并不存在最好的布局方式。Flexbox 和 CSS grid 是两种不同的布局形式，我们应该根据具体的场景将它们搭配使用，而不是相互替代。
+
+最后是一些通过实例比较的总结，并不一定时时适用，需要结合具体场景：
+
+> 1. Grid适用于布局大画面, grid使得页面的布局相对容易，甚至可以处理一些不规则和非对称的设计。
+> 2. Flexbox 非常适合解决元素内的内容水平垂直对齐等问题, 可以使用 Flex 来定位设计上一些较小的细节。
+> 3. 二维布局适合使用 grid（行与列）。
+> 4. Flexbox 适用于单一维度的布局（行或列）。
+
+#### 参考引用
+[阮一峰网格布局教程](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)
+
+[to Grid or to flex](https://juejin.im/post/5c7ce781e51d4514913c5bc4)
+
+[flex](https://mp.weixin.qq.com/s?__biz=MzIzMzQzMjg3Ng==&mid=2247484165&idx=1&sn=bfd3c98f53d2e9141a461a69576016e2&chksm=e884f146dff37850f0e75b11777d4752e1370468de68aa5b9a053a97194bb5299844a610c111&scene=21#wechat_redirect)

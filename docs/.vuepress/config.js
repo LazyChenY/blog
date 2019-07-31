@@ -27,7 +27,7 @@ module.exports = {
                 'JavaScript/QA-advanced',
                 'Other/functional-programming',
                 'JavaScript/curring',
-                'CSS/grid',
+                'CSS/grid/grid',
                 'JavaScript/Class',
                 'JavaScript/weakMap',
                 'JavaScript/clipboard',
