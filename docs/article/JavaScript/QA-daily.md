@@ -1,4 +1,4 @@
-# 每日一题
+# 每日一题  :love_letter:
 
 原repo地址: [javascript-questions](https://github.com/lydiahallie/javascript-questions)
 
@@ -1298,7 +1298,7 @@ JavaScript 只有基本类型和对象。
 
 ---
 
-## question: 41-50
+## question: 41-60
 
 #### 41. 输出是什么？
 
