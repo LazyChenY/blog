@@ -1,4 +1,4 @@
-# 每日一题
+# 每日一题  :love_letter:
 
 原repo地址: [javascript-questions](https://github.com/lydiahallie/javascript-questions)
 
