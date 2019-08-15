@@ -68,9 +68,9 @@ checkEmail('test@gmail.com'); // 校验邮箱
 柯里化的这种用途正是：**参数复用**
 
 ### 二、提前返回
-返回接受余下的参数且返回结果的新函数
+比如在下面实现柯里化的[方法一](/article/JavaScript/curring.html#方法一)中, 可以在柯里化函数的时候进行一些操作，方法一中即返回函数`collectParams`之前做一些操作，这些操作是在实际传入参数并调用原目标函数之前就能进行的，即提前返回。
 ### 三、延迟执行
-返回新函数，等待执行
+这点其实非常直观，因为不是直接返回运算结果，而是返回新函数，直到参数收集完毕再执行并返回结果，当然也就是延迟运行。
 
 ## 如何实现
 回想一下柯里化函数的作用是什么：接收一部分参数，返回一个函数接收剩余参数，接收到足够参数后，执行原函数。那么我们需要在多个函数调用中逐步收集参数，而不是在一个函数调用中一次收集，当收集到足够的参数时，返回函数执行结果。
@@ -152,69 +152,78 @@ currySum(1, 2)(3) // 6
 
 使用占位符，目的是改变参数传递的顺序，所以在 `curry` 函数实现中，每次需要记录是否使用了占位符，并且记录占位符所代表的参数位置。接下来我们来实现占位符的功能:
 ```js
-    function curry (targetFn, arity = targetFn.length, placeholder = myCurry, params = [], holders = []) {
-        let _params = []
-        return function collectParams (...args) {
-            // copy一份占位符位置列表，避免造成混乱
-            let _holders = Object.assign([], holders)
-            // 后面传入的参数
-            let nextArgs = args.slice(_params.length)
-            //循环入参，追加参数或替换占位符
-            nextArgs.forEach(item => {
-                if (item !== placeholder) {
-                    // 参数为真实参数
-                    if (holders.length) {
-                        // 之前存在占位符，将占位符替换为真实参数
-                        let index = holders.shift()
-                        params[index] = item
-                        _holders.splice(_holders.indexOf(index), 1)
-                    } else {
-                        // 之前不存在占位符，直接将参数追加到参数列表中
-                        params.push(item)
-                    }
+function curry (targetFn, arity = targetFn.length, placeholder = myCurry, params = [], holders = []) {
+    let _params = [] // 用于记录传入的原始参数
+    return function collectParams (...args) {
+        // copy一份占位符位置列表，避免造成混乱
+        let _holders = Object.assign([], holders)
+        // 每次调用柯里化后的函数时传入的参数
+        let nextArgs = args.slice(_params.length)
+        //循环入参，追加参数或替换占位符
+        nextArgs.forEach(item => {
+            if (item !== placeholder) {
+                // 参数为真实参数
+                if (holders.length) {
+                    // 之前存在占位符，将占位符替换为真实参数
+                    let index = holders.shift()
+                    params[index] = item
+                    _holders.splice(_holders.indexOf(index), 1)
                 } else {
-                    // 参数为占位符
-                    if (holders.length) {
-                        // 之前存在占位符，不操作
-                        holders.shift()
-                    } else {
-                        // 之前不存在占位符，记录占位符的位置
-                        params.push(item)
-                        _holders.push(params.length - 1)
-                    }
+                    // 之前不存在占位符，直接将参数追加到参数列表中
+                    params.push(item)
                 }
-                _params.push(item)
-            })
-            // params 中前arity条记录中不包含占位符，执行函数
-            if(params.length >= arity && Object.assign([],params).every(item => item !== placeholder)){
-                let paramsBackup = Object.assign([], params)
-                params = []
-                _params = []
-                holders = []
-                return targetFn.apply(this, paramsBackup)
             } else {
-                holders = _holders
-                return collectParams.bind(null, ...arguments)
+                // 参数为占位符
+                if (holders.length) {
+                    // 之前存在占位符，去除掉原占位符
+                    holders.shift()
+                } else {
+                    // 之前不存在占位符，记录占位符的位置
+                    params.push(item)
+                    _holders.push(params.length - 1)
+                }
             }
+            _params.push(item)
+        })
+        // params 中前arity条记录中不包含占位符，执行函数
+        if(params.length >= arity && Object.assign([],params).every(item => item !== placeholder)){
+            let paramsBackup = Object.assign([], params)
+            // 完成一次原目标函数的调用后进行一次reset
+            params = []
+            _params = []
+            holders = []
+            return targetFn.apply(this, paramsBackup)
+        } else {
+            holders = _holders
+            return collectParams.bind(null, ...arguments)
         }
     }
-    // 检查一下：
-    function print(a, b, c, d, e) {
-        console.log('print: ', a, b, c, d, e)
-    }
+}
+// 检查一下：
+function print(a, b, c, d, e) {
+    console.log('print: ', a, b, c, d, e)
+}
 
-    var _ = '_' // 定义占位符
-    var curryPrint = curry(print, 5, _)
+var _ = '_' // 定义占位符
+var curryPrint = curry(print, 5, _)
 
-    curryPrint(1, 2, 3, 4, 5)                 // 1 2 3 4 5
-    curryPrint(_, 2, 3, 4, 5)(7)              // 7 2 3 4 5
-    curryPrint(1, _, 3)(_, 4, _)(2)(8)        // 1 2 3 4 8
-    curryPrint(1, _, _, 3)(_, 4, _)(2)(9)     // 1 2 4 3 9
+curryPrint(1, 2, 3, 4, 5)                 // 1 2 3 4 5
+curryPrint(_, 2, 3, 4, 5)(7)              // 7 2 3 4 5
+curryPrint(1, _, 3)(_, 4, _)(2)(8)        // 1 2 3 4 8
+curryPrint(1, _, _, 3)(_, 4, _)(2)(9)     // 1 2 4 3 9
 ```
 至此，我们完整地实现了一个`curry`函数
 
-## 使用场景
+## 结语
+柯里化是函数式编程的产物，它生于函数式编程，也服务于函数式编程。由于把 JavaScript 代码写得符合函数式编程思想和规范的在实际项目较少，从而也限制了 Currying 等技术在 JavaScript 代码中的普遍使用。
+
+假如我们还没有准备好去写函数式编程规范的代码，仅需要在 JSX 代码中提前绑定一次参数，那么 bind 或箭头函数就足够了，Currying 可以有更好的替代品。
+
+柯里化的思想极大地助于提升函数的复用性， 也让我们在使用函数时有了很多的自由度。总之函数式编程及其思想，是值得关注、学习和应用的事物。
 
 ## 参考文章
 [Implementation of lodash ‘curry’ function](https://medium.com/@kj_huang/implementation-of-lodash-curry-function-8b1024d71e3b)
+
 [前端进阶-彻底搞懂柯里化](https://juejin.im/post/5d2299faf265da1bb67a3b65)
+
+[柯里化了解一下](https://juejin.im/post/5af13664f265da0ba266efcf#heading-8)
