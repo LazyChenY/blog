@@ -13,7 +13,7 @@
 ## 作用
 了解了柯里化函数是什么，那么它的作用呢？
 
-### 参数复用
+### 一、参数复用
 柯里化实际是把简单的问题复杂化了，但是复杂化的同时，让我们在使用函数时拥有了更多的自由度。 而对于函数参数的自由处理，正是柯里化的核心所在。 柯里化本质上是降低通用性，提高适用性。来看一个例子：
 
 我们工作中会遇到各种需要通过正则检验的需求，比如校验电话号码、校验邮箱、校验身份证号、校验密码等，
@@ -67,9 +67,9 @@ checkEmail('test@gmail.com'); // 校验邮箱
 它们与原函数 `checkByRegExp` 相比，从功能上通用性降低了，但适用性提升了。
 柯里化的这种用途正是：**参数复用**
 
-### 提前返回
+### 二、提前返回
 返回接受余下的参数且返回结果的新函数
-### 延迟执行
+### 三、延迟执行
 返回新函数，等待执行
 
 ## 如何实现
@@ -146,7 +146,72 @@ currySum(1, 2)(3) // 6
 
 `curry(func, [arity=func.length])`
 
-可以看到`curry`接受两个参数，一个是原函数，另一个可选参数是所需参数个数，默认是原函数的形参个数。除此之外，lodash的`curry`还允许使用`_`作为输入参数的占位符。
+可以看到`curry`接受两个参数，一个是原函数，另一个可选参数，是所需参数个数，默认是原函数的形参个数，和我们上述的两个方法基本类似。除此之外，lodash的`curry`还允许使用`_`(即lodash对象)作为输入参数的占位符, 并通过占位符的方式来改变传入参数的顺序。当传入一个占位符，本次调用传递的参数将略过占位符， 占位符所在的位置由下次调用的参数来填充，比如这样：
+
+`curried(1)(_, 3)(2); // => [1, 2, 3]`
+
+使用占位符，目的是改变参数传递的顺序，所以在 `curry` 函数实现中，每次需要记录是否使用了占位符，并且记录占位符所代表的参数位置。接下来我们来实现占位符的功能:
+```js
+    function curry (targetFn, arity = targetFn.length, placeholder = myCurry, params = [], holders = []) {
+        let _params = []
+        return function collectParams (...args) {
+            // copy一份占位符位置列表，避免造成混乱
+            let _holders = Object.assign([], holders)
+            // 后面传入的参数
+            let nextArgs = args.slice(_params.length)
+            //循环入参，追加参数或替换占位符
+            nextArgs.forEach(item => {
+                if (item !== placeholder) {
+                    // 参数为真实参数
+                    if (holders.length) {
+                        // 之前存在占位符，将占位符替换为真实参数
+                        let index = holders.shift()
+                        params[index] = item
+                        _holders.splice(_holders.indexOf(index), 1)
+                    } else {
+                        // 之前不存在占位符，直接将参数追加到参数列表中
+                        params.push(item)
+                    }
+                } else {
+                    // 参数为占位符
+                    if (holders.length) {
+                        // 之前存在占位符，不操作
+                        holders.shift()
+                    } else {
+                        // 之前不存在占位符，记录占位符的位置
+                        params.push(item)
+                        _holders.push(params.length - 1)
+                    }
+                }
+                _params.push(item)
+            })
+            // params 中前arity条记录中不包含占位符，执行函数
+            if(params.length >= arity && Object.assign([],params).every(item => item !== placeholder)){
+                let paramsBackup = Object.assign([], params)
+                params = []
+                _params = []
+                holders = []
+                return targetFn.apply(this, paramsBackup)
+            } else {
+                holders = _holders
+                return collectParams.bind(null, ...arguments)
+            }
+        }
+    }
+    // 检查一下：
+    function print(a, b, c, d, e) {
+        console.log('print: ', a, b, c, d, e)
+    }
+
+    var _ = '_' // 定义占位符
+    var curryPrint = curry(print, 5, _)
+
+    curryPrint(1, 2, 3, 4, 5)                 // 1 2 3 4 5
+    curryPrint(_, 2, 3, 4, 5)(7)              // 7 2 3 4 5
+    curryPrint(1, _, 3)(_, 4, _)(2)(8)        // 1 2 3 4 8
+    curryPrint(1, _, _, 3)(_, 4, _)(2)(9)     // 1 2 4 3 9
+```
+至此，我们完整地实现了一个`curry`函数
 
 ## 使用场景
 
