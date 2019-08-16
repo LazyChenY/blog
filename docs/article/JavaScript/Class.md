@@ -1,4 +1,4 @@
-# Class
+# Class :herb:
 
 ## 简介
 
