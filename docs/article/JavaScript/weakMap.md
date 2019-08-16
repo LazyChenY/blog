@@ -1,4 +1,4 @@
-# WeakMap
+# WeakMap :point_left:
 
 ## 定义
 > `WeakMap`是ES2015（ES6）中新增的几种数据类型之一，`WeakMap` 对象是键/值对的集合，有点类似`Map`, 但与`Map`又有以下两个主要区别：
