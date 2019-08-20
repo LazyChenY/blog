@@ -65,7 +65,86 @@
 
 ## 劣势
 
+## 应用举例
+
+### 高阶函数示例
+
+我们可以像操作数据那样操作一组函数，使得这些函数具备某些新的能力。这就是“过程抽象”（procedural abstraction
+）的基本思想。这些变换函数的函数我们称之为“高阶函数”。
+
+#### 1. throttle
+
+下面是一个控制函数调用频率的例子，我们常常遇到限制某个函数调用频率的场景：防止一个按钮短时间的的重复点击，防止 resize、scroll 和 mousemove 事件过于频繁地触发等。可以利用`throttle`函数来实现：
+```js
+function throttle(fn, wait){
+    var timer;
+    return function(...args){
+        if(!timer){
+            timer = setTimeout(()=>timer=null, wait);
+            return fn.apply(this, args);
+        }
+    }
+}
+
+//限制button在500ms内只能被点击一次
+btn.onclick = throttle(function(evt){
+    console.log("button clicked")
+}, 500)
+```
+
+#### 2. debounce
+
+有时候我们希望函数在某些操作执行完成之后被触发。例如，实现搜索框的 Suggest 效果，如果数据是从服务器端读取的，为了限制从服务器读取数据的频率，我们可以等待用户输入结束 100ms 之后再触发 Suggest 查询：
+```js
+function debounce(fn, delay){
+    var timer = null;
+    return function(...args){
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+    }
+}
+
+window.addEventListener("scroll", debounce(function(){
+    console.log("scrolled");
+}, 500));
+```
+#### multicast
+有时我们希望能实现批量操作
+```js
+function multicast(fn){
+  return function(list, ...args){
+    if(Array.isArray(list)){
+      return list.map((item)=>fn.apply(this, [item,...args]));
+    }else{
+      return fn.apply(this, [list,...args]);
+    }
+  }
+}
+
+function add(x, y){
+    return x + y;
+}
+
+add = multicast(add);
+
+console.log(add([1,2,3], 4)); //5,6,7
+```
+
+通过上面的例子，我们体会一下函数式编程的基本思想：
+
+设计高阶函数：操作函数的函数，例如例子中的 multicast
+高阶函数之间可以组合调用，例如 cast 调用 wrap， wrap 调用 multicast，cast 后的函数再被 zip 调用。组合调用可以给函数扩展出复杂的功能。
+
+## 总结
+
+我们说函数式编程是一种编程思想或者编程范式，上面的例子演示了函数式编程思想本身的基本应用场景。其实不管是号称支持函数式编程的 lodash, underscore 或者更强大一些的 [ramdajs](https://github.com/ramda/ramda) 库，它们的基本原理和使用场景也都包括上面的这些点。
+
+通过上面的讨论我们还可以得出结论，函数式编程拥有强大的抽象能力，也正是因为抽象能力强，函数式编程的模型才拥有巨大的潜力。
+
+函数式编程是程序设计范式的一种，就像面向对象编程一样，它是我们解决问题可以选择的模式和思路，它和命令式编程（面向过程、面向对象）之间并不意味着非此即彼的选择，而是可以并存。所以，关键问题不在于函数式编程实不实用，而在于学习一种新的思考模式，这种思考模式能够帮助我们更深入理解程序设计原理和本质，深入了解函数式编程的优点和缺点，从而写出更通用抽象能力更强质量更好的代码。
 
 [什么是函数式编程思维？ - 用心阁的回答 - 知乎](https://www.zhihu.com/question/28292740/answer/40336090)
 
 [什么是函数式编程思维？ - 小纸条的回答 - 知乎](https://www.zhihu.com/question/28292740/answer/612467700)
+
+[函数式编程离我们有多远](https://75team.com/post/functional-how-far.html)
