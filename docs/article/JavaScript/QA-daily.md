@@ -3194,7 +3194,7 @@ console.log(nums(1, 2))
 
 ---
 
-###### 96. 输出什么?
+#### 96. 输出什么?
 
 ```javascript
 class Person {
@@ -3232,7 +3232,7 @@ console.log(member.name)
 
 ---
 
-###### 97. 输出什么?
+#### 97. 输出什么?
 
 ```javascript
 const info = {
@@ -3263,7 +3263,7 @@ console.log(Object.keys(info))
 
 ---
 
-###### 98. 输出什么?
+#### 98. 输出什么?
 
 ```javascript
 const getList = ([x, ...y]) => [x, y]
@@ -3304,7 +3304,7 @@ console.log(getUser(user))
 
 ---
 
-###### 99. 输出什么?
+#### 99. 输出什么?
 
 ```javascript
 const name = "Lydia"
@@ -3335,7 +3335,7 @@ console.log(name())
 
 ---
 
-###### 100. 输出什么?
+#### 100. 输出什么?
 
 ```javascript
 // 🎉✨ This is my 100th question! ✨🎉
@@ -3364,7 +3364,9 @@ You should${'' && `n't`} see a therapist after so much JavaScript lol`
 
 ---
 
-###### 101.输出什么?
+## question: 101-120
+
+#### 101.输出什么?
 
 ```javascript
 const one = (false || {} || null)
