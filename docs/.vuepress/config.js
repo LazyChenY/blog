@@ -31,6 +31,7 @@ module.exports = {
                 'CSS/grid/grid',
                 'JavaScript/Class',
                 'JavaScript/weakMap',
+                'CSS/mouse-follow-hover',
                 'JavaScript/clipboard',
                 'JavaScript/screen/screen',
                 'JavaScript/extension',
